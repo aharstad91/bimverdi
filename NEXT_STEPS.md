@@ -1,5 +1,7 @@
 # BIMVerdi - Neste steg
 
+# BIMVerdi - Neste steg
+
 ## ✅ Ferdig
 - [x] Git repository opprettet og koblet til GitHub
 - [x] Next.js frontend oppsett med TypeScript og Tailwind CSS
@@ -7,6 +9,11 @@
 - [x] WordPress API integrasjon bibliotek
 - [x] TypeScript types for alle CPT-er
 - [x] .gitignore og miljøvariabler
+- [x] WordPress core installert med custom theme
+- [x] Custom Post Types registrert (Medlemsbedrifter, Verktøy, Caser, Arrangementer)
+- [x] CORS konfigurert for headless setup
+- [x] Servebolt deployment dokumentasjon
+- [x] Production environment config
 - [x] Initial commit pushed til GitHub
 
 ## 📋 Neste steg - WordPress Backend
@@ -142,6 +149,10 @@ bimverdi/
 
 1. **Autentisering**: JWT tokens eller annen løsning?
 2. **GraphQL vs REST**: Vil du bruke WPGraphQL eller REST API?
-3. **Hosting**: Hvor skal løsningen hostes? (Vercel for Next.js, WP Engine for WordPress?)
-4. **Analytics**: Google Analytics, Matomo, eller annet?
-5. **Design system**: Egen design eller bruke Tailwind UI/shadcn?
+3. **Innsendings-skjemaer**: ACF Forms eller custom React forms?
+4. **Hosting**:
+   - WordPress: Servebolt.com ✅ (allerede planlagt)
+   - Frontend: Vercel (anbefalt) eller Servebolt?
+5. **Analytics**: Google Analytics, Matomo, eller annet?
+6. **Design system**: Egen design eller bruke Tailwind UI/shadcn?
+7. **Staging environment**: Subdomain på Servebolt?
