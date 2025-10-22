@@ -279,11 +279,11 @@ export async function getMembers(): Promise<Member[]> {
       `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/member`,
       { next: { revalidate: 3600 } } // ISR with 1 hour cache
     );
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch members: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Error fetching members:', error);
@@ -300,7 +300,7 @@ import { MemberCard } from '@/components/members/MemberCard';
 
 export default async function MembersPage() {
   const members = await getMembers();
-  
+
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Medlemsbedrifter</h1>
@@ -327,7 +327,7 @@ interface SearchBarProps {
 
 export function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState('');
-  
+
   return (
     <input
       type="search"

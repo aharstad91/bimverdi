@@ -1,7 +1,7 @@
 # BimVerdi - Teknisk Audit og Miljødokumentasjon
 
-**Dato**: 22. oktober 2025  
-**Versjon**: 1.0  
+**Dato**: 22. oktober 2025
+**Versjon**: 1.0
 **Prosjekt**: BimVerdi Headless WordPress med Next.js
 
 ---
@@ -587,6 +587,6 @@ npm run lint     # Lint code
 
 ---
 
-**Sist oppdatert**: 22. oktober 2025  
-**Vedlikeholdt av**: Andreas Harstad  
+**Sist oppdatert**: 22. oktober 2025
+**Vedlikeholdt av**: Andreas Harstad
 **Repository**: https://github.com/aharstad91/bimverdi

@@ -86,8 +86,8 @@ npm run dev
 
 ### Backend: WordPress (Headless CMS)
 
-**Version**: Latest WordPress 6.x  
-**Location**: `/Applications/MAMP/htdocs/bimverdi/wordpress/`  
+**Version**: Latest WordPress 6.x
+**Location**: `/Applications/MAMP/htdocs/bimverdi/wordpress/`
 **URL**: `http://localhost:8888/bimverdi/wordpress`
 
 **PHP Configuration:**
@@ -124,7 +124,7 @@ WP_DEBUG: false
 - TypeScript: 5.x
 - Tailwind CSS: 4.x
 
-**Location**: `/Applications/MAMP/htdocs/bimverdi/frontend/`  
+**Location**: `/Applications/MAMP/htdocs/bimverdi/frontend/`
 **URL**: `http://localhost:3000`
 
 **Key Features:**
@@ -146,15 +146,15 @@ NEXTAUTH_SECRET=change-in-production
 
 ### Database: MySQL 8.0
 
-**Location**: `/Applications/MAMP/Library/bin/mysql80/`  
-**Database**: `bimverdi`  
+**Location**: `/Applications/MAMP/Library/bin/mysql80/`
+**Database**: `bimverdi`
 **Charset**: `utf8mb4_unicode_ci`
 
 **Standard WordPress Tables:**
 ```
 wp_commentmeta, wp_comments, wp_links, wp_options,
-wp_postmeta, wp_posts, wp_term_relationships, 
-wp_term_taxonomy, wp_termmeta, wp_terms, 
+wp_postmeta, wp_posts, wp_term_relationships,
+wp_term_taxonomy, wp_termmeta, wp_terms,
 wp_usermeta, wp_users
 ```
 
@@ -346,11 +346,11 @@ export async function getMembers(): Promise<Member[]> {
         next: { revalidate: 3600 }, // ISR: Revalidate every hour
       }
     );
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Error fetching members:', error);
@@ -368,11 +368,11 @@ import { MemberCard } from '@/components/members/MemberCard';
 
 export default async function MembersPage() {
   const members = await getMembers();
-  
+
   if (members.length === 0) {
     return <p>No members found</p>;
   }
-  
+
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="mb-8 text-3xl font-bold">Medlemsbedrifter</h1>
@@ -540,28 +540,28 @@ EXIT;
 
 ```sql
 -- Count published posts
-SELECT COUNT(*) FROM wp_posts 
+SELECT COUNT(*) FROM wp_posts
 WHERE post_status='publish' AND post_type='post';
 
 -- List all members
-SELECT ID, post_title, post_date 
-FROM wp_posts 
+SELECT ID, post_title, post_date
+FROM wp_posts
 WHERE post_type='member' AND post_status='publish'
 ORDER BY post_date DESC
 LIMIT 10;
 
 -- Get site URL
-SELECT option_value FROM wp_options 
+SELECT option_value FROM wp_options
 WHERE option_name='siteurl';
 
 -- List all users
-SELECT ID, user_login, user_email, user_registered 
+SELECT ID, user_login, user_email, user_registered
 FROM wp_users;
 
 -- Count posts by type
-SELECT post_type, COUNT(*) as count 
-FROM wp_posts 
-WHERE post_status='publish' 
+SELECT post_type, COUNT(*) as count
+FROM wp_posts
+WHERE post_status='publish'
 GROUP BY post_type;
 ```
 
@@ -666,10 +666,10 @@ const HeavyComponent = dynamic(() => import('@/components/HeavyComponent'));
 
 // Optimize images
 import Image from 'next/image';
-<Image 
-  src="/image.jpg" 
-  width={500} 
-  height={300} 
+<Image
+  src="/image.jpg"
+  width={500}
+  height={300}
   alt="Description"
   priority={false} // true for above-the-fold images
 />
@@ -696,7 +696,7 @@ ANALYZE TABLE wp_posts, wp_postmeta;
 OPTIMIZE TABLE wp_posts, wp_postmeta;
 
 -- Check table sizes
-SELECT 
+SELECT
   table_name AS 'Table',
   ROUND(((data_length + index_length) / 1024 / 1024), 2) AS 'Size (MB)'
 FROM information_schema.TABLES
@@ -728,11 +728,11 @@ export async function getPrivateData(token: string) {
       'Authorization': `Bearer ${token}`,
     },
   });
-  
+
   if (response.status === 401) {
     throw new Error('Unauthorized');
   }
-  
+
   return response.json();
 }
 ```
@@ -745,7 +745,7 @@ function searchPosts(query: string): string {
   if (typeof query !== 'string') {
     throw new Error('Invalid query');
   }
-  
+
   // Sanitize
   return query.trim().slice(0, 100);
 }

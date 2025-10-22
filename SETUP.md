@@ -144,7 +144,7 @@ Navigate to: **Plugins → Add New**
 
 4. **WPGraphQL for Advanced Custom Fields**
    - Exposes ACF fields via GraphQL
-   
+
 5. **Yoast SEO**
    - SEO optimization
 

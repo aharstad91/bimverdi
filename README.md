@@ -65,7 +65,7 @@ npm run dev
   - Advanced Custom Fields (ACF)
   - WPGraphQL
   - JWT Authentication
-  
+
 - **Frontend**: Next.js 16.0 + React 19
   - TypeScript 5.x (strict mode)
   - Tailwind CSS 4.x
