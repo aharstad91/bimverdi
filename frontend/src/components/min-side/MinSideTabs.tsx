@@ -54,7 +54,7 @@ export function MinSideTabs() {
           const activeClasses = isActive
             ? 'border-blue-600 text-blue-600'
             : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700';
-          
+
           return (
             <Link
               key={tab.name}

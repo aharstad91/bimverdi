@@ -5,7 +5,7 @@ export default function MinSidePage() {
     <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Profile Card */}
-        <Link 
+        <Link
           href="/min-side/profil"
           className="group bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200 hover:shadow-md transition-all"
         >
@@ -22,7 +22,7 @@ export default function MinSidePage() {
         </Link>
 
         {/* Password Card */}
-        <Link 
+        <Link
           href="/min-side/passord"
           className="group bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200 hover:shadow-md transition-all"
         >
@@ -39,7 +39,7 @@ export default function MinSidePage() {
         </Link>
 
         {/* Content Management */}
-        <Link 
+        <Link
           href="/min-side/innhold"
           className="group bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200 hover:shadow-md transition-all"
         >
@@ -56,7 +56,7 @@ export default function MinSidePage() {
         </Link>
 
         {/* Consents */}
-        <Link 
+        <Link
           href="/min-side/samtykker"
           className="group bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200 hover:shadow-md transition-all"
         >
@@ -73,7 +73,7 @@ export default function MinSidePage() {
         </Link>
 
         {/* Membership */}
-        <Link 
+        <Link
           href="/min-side/medlemskap"
           className="group bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200 hover:shadow-md transition-all"
         >
