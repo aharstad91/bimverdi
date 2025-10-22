@@ -2,10 +2,12 @@
 
 Headless WordPress løsning for BIMVerdi - Norsk plattform for BIM-verdiskapning.
 
+**Produksjon**: Hosted på Servebolt.com
+
 ## Arkitektur
 
-- **Backend**: WordPress (MAMP) med ACF + Custom Post Types
-- **Frontend**: Next.js (React) med TypeScript
+- **Backend**: WordPress (Servebolt i prod, MAMP lokalt) med ACF + Custom Post Types
+- **Frontend**: Next.js (React) med TypeScript (Vercel anbefalt)
 - **API**: WordPress REST API / WPGraphQL
 
 ## Struktur
@@ -64,5 +66,15 @@ Se `.env.example` i hver mappe for påkrevde variabler.
 
 ## Utvikling
 
-- WordPress: http://localhost:8888/bimverdi/wordpress
-- Next.js: http://localhost:3000
+- WordPress lokal: http://localhost:8888/bimverdi/wordpress
+- Next.js lokal: http://localhost:3000
+
+## Produksjon
+
+Se **SERVEBOLT_DEPLOYMENT.md** for detaljert deployment guide.
+
+### Hosting
+- **WordPress**: Servebolt.com
+- **Next.js**: Vercel (anbefalt) eller Servebolt
+- **Database**: Servebolt MySQL
+- **CDN**: Servebolt Accelerated Domains
