@@ -117,6 +117,9 @@ add_action('after_setup_theme', 'bimverdi_theme_support');
 // Expose ACF fields in REST API
 add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
 
+// Include ACF Field Groups
+require_once get_template_directory() . '/acf-fields.php';
+
 // Add ACF fields to REST API response
 add_action('rest_api_init', function() {
     $post_types = ['members', 'tools', 'cases', 'events', 'post'];

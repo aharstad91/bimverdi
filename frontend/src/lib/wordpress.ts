@@ -61,19 +61,19 @@ export async function getPostBySlug(slug: string) {
 /**
  * Fetch custom post type entries
  */
-export async function getCustomPosts(
+export async function getCustomPosts<T = any>(
   postType: 'members' | 'tools' | 'cases' | 'events',
   params?: {
     page?: number;
     perPage?: number;
   }
-) {
+): Promise<T[]> {
   const searchParams = new URLSearchParams();
   if (params?.page) searchParams.set('page', params.page.toString());
   if (params?.perPage) searchParams.set('per_page', params.perPage.toString());
 
   const query = searchParams.toString();
-  return fetchAPI(`/wp/v2/${postType}${query ? `?${query}` : ''}`);
+  return fetchAPI<T[]>(`/wp/v2/${postType}${query ? `?${query}` : ''}`);
 }
 
 /**
