@@ -1,80 +1,139 @@
+import Link from 'next/link';
+
 export default function MinSidePage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold mb-8">Min Side</h1>
-      
+    <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Profile Card */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h2 className="text-xl font-semibold mb-4">Min profil</h2>
+        <Link 
+          href="/min-side/profil"
+          className="group bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">👤</span>
+            <h2 className="text-xl font-semibold text-gray-900">Min profil</h2>
+          </div>
           <p className="text-gray-600 mb-4">
             Administrer din profil og kontaktinformasjon
           </p>
-          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            Rediger profil
-          </button>
-        </div>
+          <span className="text-blue-600 font-medium group-hover:underline">
+            Gå til profil →
+          </span>
+        </Link>
+
+        {/* Password Card */}
+        <Link 
+          href="/min-side/passord"
+          className="group bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">🔐</span>
+            <h2 className="text-xl font-semibold text-gray-900">Passord</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Endre passord og sikkerhetsinformasjon
+          </p>
+          <span className="text-purple-600 font-medium group-hover:underline">
+            Administrer passord →
+          </span>
+        </Link>
 
         {/* Content Management */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h2 className="text-xl font-semibold mb-4">Mitt innhold</h2>
-          <ul className="space-y-2 text-gray-600">
-            <li>• Mine caser</li>
-            <li>• Mine verktøy</li>
-            <li>• Mine artikler</li>
-            <li>• Mine arrangementer</li>
-          </ul>
-          <button className="w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            Administrer innhold
-          </button>
-        </div>
+        <Link 
+          href="/min-side/innhold"
+          className="group bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">📄</span>
+            <h2 className="text-xl font-semibold text-gray-900">Mitt innhold</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Administrer caser, verktøy, artikler og arrangementer
+          </p>
+          <span className="text-green-600 font-medium group-hover:underline">
+            Se innhold →
+          </span>
+        </Link>
 
         {/* Consents */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h2 className="text-xl font-semibold mb-4">Samtykker</h2>
+        <Link 
+          href="/min-side/samtykker"
+          className="group bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">⚙️</span>
+            <h2 className="text-xl font-semibold text-gray-900">Samtykker</h2>
+          </div>
           <p className="text-gray-600 mb-4">
-            Administrer dine personverninnstillinger
+            Administrer personverninnstillinger og samtykker
           </p>
-          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            Endre samtykker
-          </button>
-        </div>
+          <span className="text-orange-600 font-medium group-hover:underline">
+            Endre samtykker →
+          </span>
+        </Link>
+
+        {/* Membership */}
+        <Link 
+          href="/min-side/medlemskap"
+          className="group bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">⭐</span>
+            <h2 className="text-xl font-semibold text-gray-900">Medlemskap</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Se medlemsinfo og oppgrader abonnement
+          </p>
+          <span className="text-yellow-600 font-medium group-hover:underline">
+            Se medlemskap →
+          </span>
+        </Link>
       </div>
 
       {/* Quick Actions */}
-      <div className="mt-8 bg-gradient-to-r from-blue-50 to-blue-100 p-8 rounded-lg">
-        <h2 className="text-2xl font-bold mb-6">Hurtighandlinger</h2>
+      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg border border-blue-100">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900">Hurtighandlinger</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left">
-            <div className="text-2xl mb-2">📝</div>
-            <div className="font-semibold">Ny case</div>
+          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+            <div className="text-3xl mb-2">📝</div>
+            <div className="font-semibold text-gray-900">Ny case</div>
+            <div className="text-sm text-gray-500 mt-1">Legg til prosjekt</div>
           </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left">
-            <div className="text-2xl mb-2">🛠️</div>
-            <div className="font-semibold">Nytt verktøy</div>
+          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+            <div className="text-3xl mb-2">🛠️</div>
+            <div className="font-semibold text-gray-900">Nytt verktøy</div>
+            <div className="text-sm text-gray-500 mt-1">Publiser verktøy</div>
           </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left">
-            <div className="text-2xl mb-2">📄</div>
-            <div className="font-semibold">Ny artikkel</div>
+          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+            <div className="text-3xl mb-2">📄</div>
+            <div className="font-semibold text-gray-900">Ny artikkel</div>
+            <div className="text-sm text-gray-500 mt-1">Skriv innlegg</div>
           </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left">
-            <div className="text-2xl mb-2">📅</div>
-            <div className="font-semibold">Nytt arrangement</div>
+          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+            <div className="text-3xl mb-2">📅</div>
+            <div className="font-semibold text-gray-900">Nytt arrangement</div>
+            <div className="text-sm text-gray-500 mt-1">Opprett event</div>
           </button>
         </div>
       </div>
 
-      {/* Membership Info */}
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4">Medlemskap</h2>
-        <div className="flex justify-between items-center">
-          <div>
-            <p className="text-gray-600">Medlemsnivå: <span className="font-semibold text-blue-600">Premium</span></p>
-            <p className="text-gray-600 mt-1">Medlem siden: Januar 2024</p>
-          </div>
-          <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 transition">
-            Oppgrader
-          </button>
+      {/* Stats Overview */}
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-3xl font-bold text-blue-600">12</div>
+          <div className="text-sm text-gray-600 mt-1">Publiserte caser</div>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-3xl font-bold text-green-600">8</div>
+          <div className="text-sm text-gray-600 mt-1">Verktøy</div>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-3xl font-bold text-purple-600">25</div>
+          <div className="text-sm text-gray-600 mt-1">Artikler</div>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-3xl font-bold text-orange-600">5</div>
+          <div className="text-sm text-gray-600 mt-1">Arrangementer</div>
         </div>
       </div>
     </div>
