@@ -88,32 +88,61 @@ export default function MinSidePage() {
             Se medlemskap →
           </span>
         </Link>
+
+        {/* My Member Company */}
+        <Link
+          href="/min-side/mitt-medlem"
+          className="group bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border border-indigo-200 hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">🏢</span>
+            <h2 className="text-xl font-semibold text-gray-900">Mitt Foretak</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Koble deg til ditt medlemsforetak og administrer verktøy
+          </p>
+          <span className="text-indigo-600 font-medium group-hover:underline">
+            Administrer foretak →
+          </span>
+        </Link>
       </div>
 
       {/* Quick Actions */}
       <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg border border-blue-100">
         <h2 className="text-2xl font-bold mb-6 text-gray-900">Hurtighandlinger</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+          <Link
+            href="/min-side/innhold?type=case&action=new"
+            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
+          >
             <div className="text-3xl mb-2">📝</div>
             <div className="font-semibold text-gray-900">Ny case</div>
             <div className="text-sm text-gray-500 mt-1">Legg til prosjekt</div>
-          </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+          </Link>
+          <Link
+            href="/min-side/verktoy"
+            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
+          >
             <div className="text-3xl mb-2">🛠️</div>
             <div className="font-semibold text-gray-900">Nytt verktøy</div>
             <div className="text-sm text-gray-500 mt-1">Publiser verktøy</div>
-          </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+          </Link>
+          <Link
+            href="/min-side/innhold?type=post&action=new"
+            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
+          >
             <div className="text-3xl mb-2">📄</div>
             <div className="font-semibold text-gray-900">Ny artikkel</div>
             <div className="text-sm text-gray-500 mt-1">Skriv innlegg</div>
-          </button>
-          <button className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200">
+          </Link>
+          <Link
+            href="/min-side/innhold?type=event&action=new"
+            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
+          >
             <div className="text-3xl mb-2">📅</div>
             <div className="font-semibold text-gray-900">Nytt arrangement</div>
             <div className="text-sm text-gray-500 mt-1">Opprett event</div>
-          </button>
+          </Link>
         </div>
       </div>
 

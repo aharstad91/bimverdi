@@ -1,7 +1,7 @@
 <?php
 /**
  * ACF Field Groups for BIMVerdi
- * 
+ *
  * Register all field groups for Custom Post Types
  */
 
@@ -71,6 +71,14 @@ acf_add_local_field_group(array(
             'label' => 'Postnummer',
             'name' => 'postal_code',
             'type' => 'text',
+        ),
+        array(
+            'key' => 'field_org_number',
+            'label' => 'Organisasjonsnummer',
+            'name' => 'org_number',
+            'type' => 'text',
+            'instructions' => 'Organisasjonsnummer (9 siffer)',
+            'maxlength' => 9,
         ),
         array(
             'key' => 'field_employees',
@@ -186,6 +194,20 @@ acf_add_local_field_group(array(
             'name' => 'tool_features',
             'type' => 'textarea',
             'rows' => 5,
+        ),
+        array(
+            'key' => 'field_tool_owner_member',
+            'label' => 'Eier (Medlemsforetak)',
+            'name' => 'owner_member',
+            'type' => 'post_object',
+            'required' => 0,
+            'post_type' => array('members'),
+            'taxonomy' => array(),
+            'allow_null' => 1,
+            'multiple' => 0,
+            'return_format' => 'id',
+            'ui' => 1,
+            'instructions' => 'Hvilket medlemsforetak eier/administrerer dette verktøyet?',
         ),
     ),
     'location' => array(

@@ -28,6 +28,7 @@ export interface UserACF {
   };
   bio?: string;
   newsletter_subscription?: boolean;
+  associated_member?: number; // Member post ID
 }
 
 export interface RegisterFormData {
@@ -68,3 +69,25 @@ export interface ResetPasswordData {
   newPassword: string;
   confirmPassword: string;
 }
+
+// Member types for user association
+export interface SimpleMember {
+  id: number;
+  title: string;
+  slug: string;
+  acf?: {
+    company_name?: string;
+    logo?: any;
+    description?: string;
+    website?: string;
+    contact_email?: string;
+    city?: string;
+    org_number?: string;
+  };
+}
+
+export interface MemberSearchResult {
+  members: SimpleMember[];
+  total: number;
+}
+

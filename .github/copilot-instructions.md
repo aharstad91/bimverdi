@@ -194,6 +194,26 @@ npm run dev
 # WP Admin: http://localhost:8888/bimverdi/wordpress/wp-admin
 ```
 
+**IMPORTANT - Next.js Development Server:**
+- **ALWAYS check if Next.js is running** before performing frontend operations
+- If you get connection errors to `localhost:3000`, the server is down
+- **CRITICAL: You MUST be in the `frontend` directory to run npm commands**
+- **Automatically start the server** when needed:
+  ```bash
+  cd /Applications/MAMP/htdocs/bimverdi/frontend && npm run dev
+  ```
+  OR if already in project root:
+  ```bash
+  cd frontend && npm run dev
+  ```
+- **Common mistake:** Running `npm run dev` from `/Applications/MAMP/htdocs/bimverdi/` will fail with ENOENT error
+- **Correct path:** Must be in `/Applications/MAMP/htdocs/bimverdi/frontend/`
+- Run in **background mode** (`isBackground: true`) so it stays running
+- If server crashes, **restart it immediately** before continuing
+- Check server status: `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000`
+- Expected response: `200` or `307` (redirect) = server is running
+- Response `000` or exit code `7` = server is down, must restart
+
 ### WordPress Development
 ```bash
 # Navigate to WordPress directory
@@ -458,7 +478,54 @@ interface Case {
 
 ---
 
-## 🚫 Common Pitfalls to Avoid
+## 🔧 Troubleshooting
+
+### Next.js Server Not Running
+**Problem:** `curl: (7) Failed to connect to localhost port 3000`
+
+**Solution:**
+```bash
+# Check if server is running
+curl -s -o /dev/null -w "%{http_code}" http://localhost:3000
+
+# If down (exit code 7 or response 000), restart it:
+# MUST use full path or cd to frontend first
+cd /Applications/MAMP/htdocs/bimverdi/frontend && npm run dev
+```
+
+**Common Error:** `npm error enoent Could not read package.json`
+- This means you're in wrong directory (probably `/bimverdi/` instead of `/bimverdi/frontend/`)
+- Solution: Always use `cd frontend && npm run dev` or full path
+
+**AI Assistant Action:**
+- Always check server status before frontend operations
+- Auto-restart with `isBackground: true` if needed
+- **MUST specify correct path:** Use `cd frontend && npm run dev` from project root
+- Wait 2-3 seconds after restart before testing pages
+
+### Server Component vs Client Component Errors
+**Problem:** `You're importing a component that needs "next/headers". That only works in a Server Component`
+
+**Solution:**
+- Move server-only code (cookies, headers) to Server Components
+- Use Server Actions for Client Components that need server data
+- Import `'use server'` functions from `/app/actions/`
+
+### WordPress API Not Responding
+**Problem:** WordPress endpoints return 404 or connection refused
+
+**Solution:**
+```bash
+# Check MAMP is running
+# WordPress URL: http://localhost:8888/bimverdi/wordpress
+
+# Test REST API
+curl http://localhost:8888/bimverdi/wordpress/index.php?rest_route=/wp/v2/posts
+```
+
+---
+
+## �🚫 Common Pitfalls to Avoid
 
 ### Don't Do This:
 ```typescript

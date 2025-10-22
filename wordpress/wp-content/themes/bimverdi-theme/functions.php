@@ -1,7 +1,7 @@
 <?php
 /**
  * BIMVerdi Theme Functions
- * 
+ *
  * Registers Custom Post Types and enables CORS for headless setup
  */
 
@@ -19,7 +19,7 @@ add_action('rest_api_init', function() {
 
 // Register Custom Post Types
 function bimverdi_register_post_types() {
-    
+
     // Medlemsbedrifter
     register_post_type('members', [
         'labels' => [
@@ -34,7 +34,7 @@ function bimverdi_register_post_types() {
         'has_archive' => true,
         'show_in_rest' => true,
         'rest_base' => 'members',
-        'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'],
+        'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
         'menu_icon' => 'dashicons-building',
         'show_in_graphql' => true,
         'graphql_single_name' => 'member',
@@ -114,22 +114,20 @@ function bimverdi_theme_support() {
 }
 add_action('after_setup_theme', 'bimverdi_theme_support');
 
-// Expose ACF fields in REST API
-add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
-
 // Include ACF Field Groups
 require_once get_template_directory() . '/acf-fields.php';
 
-// Add ACF fields to REST API response
-add_action('rest_api_init', function() {
-    $post_types = ['members', 'tools', 'cases', 'events', 'post'];
-    
-    foreach ($post_types as $post_type) {
-        register_rest_field($post_type, 'acf', [
-            'get_callback' => function($object) {
-                return get_fields($object['id']);
-            },
-            'schema' => null,
-        ]);
+// Enable ACF REST API support
+add_filter('acf/settings/rest_api_enabled', '__return_true');
+add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
+
+// Disable Gutenberg for custom post types to avoid REST API conflicts
+// To re-enable: just comment out or remove this filter
+add_filter('use_block_editor_for_post_type', function($is_enabled, $post_type) {
+    $disabled_post_types = ['members', 'tools', 'cases', 'events'];
+
+    if (in_array($post_type, $disabled_post_types)) {
+        return false;
     }
-});
+    return $is_enabled;
+}, 10, 2);

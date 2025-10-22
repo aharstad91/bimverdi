@@ -33,6 +33,11 @@ export interface Member extends WPPost {
     address?: string;
     membership_level?: string;
     services?: string[];
+    city?: string;
+    postal_code?: string;
+    org_number?: string;
+    employees?: number;
+    founded_year?: number;
   };
 }
 
@@ -46,6 +51,15 @@ export interface Tool extends WPPost {
     version?: string;
     author?: string;
     compatibility?: string[];
+    owner_member?: number; // Member post ID
+    tool_logo?: any;
+    tool_description?: string;
+    tool_category?: string;
+    tool_vendor?: string;
+    tool_website?: string;
+    tool_price_range?: string;
+    tool_platforms?: string[];
+    tool_features?: string;
   };
 }
 
