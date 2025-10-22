@@ -12,6 +12,7 @@
 - [Daily Development Workflow](#-daily-development-workflow)
 - [File Structure](#-file-structure)
 - [Common Development Tasks](#-common-development-tasks)
+- [User Management & Authentication](#-user-management--authentication)
 - [API Integration](#-api-integration)
 - [Database Operations](#-database-operations)
 - [Testing & Debugging](#-testing--debugging)
@@ -333,6 +334,279 @@ export default function MyPage() {
   );
 }
 ```
+
+---
+
+## 👤 User Management & Authentication
+
+### Overview
+
+BimVerdi has a complete user management system with:
+- ✅ User registration with email verification
+- ✅ Login/logout functionality
+- ✅ "Min Side" (My Profile) page
+- ✅ Profile editing with ACF custom fields
+- ✅ Password change
+- ✅ Password reset via email
+- ✅ Session management with iron-session
+- ✅ Custom WordPress role: `bimverdi_customer`
+
+### Architecture
+
+```
+┌──────────────┐         ┌─────────────────────┐
+│   Next.js    │ ◄─API─► │    WordPress        │
+│   Frontend   │         │  User Management    │
+│              │         │  Plugin             │
+│  - /registrer│         │  - REST API         │
+│  - /logg-inn │         │  - ACF Fields       │
+│  - /minside  │         │  - Roles            │
+└──────────────┘         └─────────────────────┘
+```
+
+### Key Files
+
+#### WordPress Plugin
+```
+wordpress/wp-content/plugins/bimverdi-user-management/
+├── bimverdi-user-management.php     # Main plugin file
+├── includes/
+│   ├── class-user-roles.php         # Custom role: bimverdi_customer
+│   ├── class-acf-fields.php         # User profile fields
+│   ├── class-rest-api.php           # API endpoints
+│   └── class-authentication.php     # CORS & auth helpers
+```
+
+#### Frontend
+```
+frontend/src/
+├── lib/
+│   ├── session.ts                   # iron-session config
+│   └── auth.ts                      # WordPress API client
+├── types/
+│   └── user.ts                      # User TypeScript types
+├── components/
+│   ├── auth/
+│   │   ├── RegisterForm.tsx         # Registration form
+│   │   ├── LoginForm.tsx            # Login form
+│   │   └── LogoutButton.tsx         # Logout button
+│   └── profile/
+│       ├── ProfileSection.tsx       # Edit profile
+│       └── ChangePasswordSection.tsx# Change password
+├── app/
+│   ├── (pages)/
+│   │   ├── registrer/page.tsx       # Registration page
+│   │   ├── logg-inn/page.tsx        # Login page
+│   │   └── minside/page.tsx         # Profile page
+│   └── api/
+│       ├── auth/
+│       │   ├── register/route.ts    # Registration API
+│       │   ├── login/route.ts       # Login API
+│       │   └── logout/route.ts      # Logout API
+│       └── profile/
+│           ├── route.ts             # Get/update profile
+│           └── change-password/route.ts # Change password
+```
+
+### User Registration Flow
+
+1. User fills out form at `/registrer`
+2. Frontend calls `/api/auth/register`
+3. API calls WordPress endpoint `/bimverdi/v1/register`
+4. WordPress creates user with role `bimverdi_customer`
+5. Welcome email sent
+6. User redirected to `/logg-inn?registered=true`
+
+```typescript
+// Example: Register a new user
+const response = await fetch('/api/auth/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: 'user@example.com',
+    password: 'SecurePass123',
+    first_name: 'John',
+    last_name: 'Doe',
+  }),
+});
+```
+
+### Login Flow
+
+1. User enters credentials at `/logg-inn`
+2. Frontend calls `/api/auth/login`
+3. API authenticates against WordPress via Basic Auth
+4. On success, creates iron-session with user data
+5. User redirected to `/minside`
+
+```typescript
+// Session data structure
+interface SessionData {
+  userId?: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
+  isLoggedIn: boolean;
+}
+```
+
+### Protected Routes
+
+Use session check to protect routes:
+
+```typescript
+// app/(pages)/minside/page.tsx
+import { getSession } from '@/lib/session';
+import { redirect } from 'next/navigation';
+
+export default async function MinSidePage() {
+  const session = await getSession();
+
+  if (!session.isLoggedIn) {
+    redirect('/logg-inn?returnUrl=/minside');
+  }
+
+  // Render protected content
+  return <div>Welcome {session.firstName}!</div>;
+}
+```
+
+### ACF User Fields
+
+The following custom fields are available for users:
+
+```typescript
+interface UserACF {
+  phone?: string;              // Telefon
+  company?: string;            // Firma
+  position?: string;           // Stilling
+  address?: string;            // Adresse
+  postal_code?: string;        // Postnummer
+  city?: string;               // Poststed
+  profile_picture?: {          // Profilbilde
+    url: string;
+    alt: string;
+  };
+  bio?: string;                // Om meg
+  newsletter_subscription?: boolean; // Motta nyhetsbrev
+}
+```
+
+### WordPress REST API Endpoints
+
+All endpoints are prefixed with `/bimverdi/v1`:
+
+| Endpoint | Method | Auth | Description |
+|----------|--------|------|-------------|
+| `/register` | POST | No | Register new user |
+| `/profile` | GET | Yes | Get current user profile |
+| `/profile` | PUT | Yes | Update user profile |
+| `/change-password` | POST | Yes | Change password |
+| `/forgot-password` | POST | No | Request password reset |
+| `/reset-password` | POST | No | Reset password with token |
+
+Example:
+```bash
+# Register user
+curl -X POST http://localhost:8888/bimverdi/wordpress/index.php?rest_route=/bimverdi/v1/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "SecurePass123",
+    "first_name": "John",
+    "last_name": "Doe"
+  }'
+
+# Get profile (requires auth)
+curl http://localhost:8888/bimverdi/wordpress/index.php?rest_route=/bimverdi/v1/profile \
+  --cookie "bimverdi_session=..."
+```
+
+### Checking User Role in WordPress
+
+```bash
+# List users with bimverdi_customer role
+wp user list --role=bimverdi_customer
+
+# Check user's role
+wp user get john@example.com --field=roles
+
+# Change user role
+wp user set-role john@example.com bimverdi_customer
+```
+
+### Testing Authentication
+
+```bash
+# 1. Start servers
+# MAMP: Start Apache + MySQL
+# Frontend: npm run dev
+
+# 2. Register a test user
+open http://localhost:3000/registrer
+
+# 3. Check user was created in WordPress
+wp user list --search=test@example.com
+
+# 4. Login
+open http://localhost:3000/logg-inn
+
+# 5. Access profile
+open http://localhost:3000/minside
+```
+
+### Password Reset Flow
+
+1. User clicks "Glemt passord?" on login page
+2. Enter email at `/glemt-passord` (to be created)
+3. WordPress generates reset token
+4. Email sent with link: `/tilbakestill-passord?key=xxx&email=xxx`
+5. User enters new password
+6. Password updated, redirect to login
+
+### Security Notes
+
+- ✅ Passwords hashed by WordPress (bcrypt)
+- ✅ Session data encrypted with iron-session
+- ✅ CORS configured for frontend domain
+- ✅ CSRF protection via same-site cookies
+- ✅ Email validation and sanitization
+- ✅ Password minimum 8 characters
+- ⚠️ Change `SESSION_SECRET` in production
+- ⚠️ Use HTTPS in production
+
+### Environment Variables
+
+```bash
+# frontend/.env.local
+SESSION_SECRET=complex_password_at_least_32_characters_long_change_in_production_bimverdi_2025
+FRONTEND_URL=http://localhost:3000
+```
+
+### Common User Management Tasks
+
+```bash
+# Activate plugin
+wp plugin activate bimverdi-user-management
+
+# Check ACF fields registered
+wp eval "var_dump(acf_get_field_group('group_user_profile'));"
+
+# List all customer users
+wp user list --role=bimverdi_customer --format=table
+
+# Update user ACF field
+wp eval "update_field('phone', '12345678', 'user_1');"
+
+# Delete test users
+wp user delete test@example.com --yes
+
+# Reset user password
+wp user update john@example.com --user_pass=newpassword
+```
+
+---
 
 ### Fetching WordPress Data
 
