@@ -4,6 +4,8 @@ wordpress/wp-content/cache/
 wordpress/wp-content/backups/
 wordpress/wp-content/upgrade/
 wordpress/wp-content/ai1wm-backups/
+wordpress/wp-content/plugins/*
+!wordpress/wp-content/plugins/.gitkeep
 wordpress/wp-config.php
 wordpress/.htaccess
 
