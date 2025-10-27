@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface Tab {
   name: string;
@@ -46,27 +48,35 @@ export function MinSideTabs() {
   const pathname = usePathname();
 
   return (
-    <div className="border-b border-gray-200 bg-white rounded-t-lg">
-      <nav className="-mb-px flex space-x-1 px-4 overflow-x-auto" aria-label="Tabs">
+    <Card className="shadow-md">
+      <nav className="flex space-x-1 px-2 py-2 overflow-x-auto" aria-label="Tabs">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href;
-          const baseClasses = 'group inline-flex items-center gap-2 border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap transition-colors';
-          const activeClasses = isActive
-            ? 'border-blue-600 text-blue-600'
-            : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700';
 
           return (
             <Link
               key={tab.name}
               href={tab.href}
-              className={`${baseClasses} ${activeClasses}`}
+              className={`
+                group inline-flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap rounded-lg transition-all
+                ${
+                  isActive
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                }
+              `}
             >
               <span className="text-lg">{tab.icon}</span>
               <span>{tab.name}</span>
+              {isActive && (
+                <Badge variant="secondary" className="ml-1 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-primary-foreground/20 text-primary-foreground">
+                  ✓
+                </Badge>
+              )}
             </Link>
           );
         })}
       </nav>
-    </div>
+    </Card>
   );
 }

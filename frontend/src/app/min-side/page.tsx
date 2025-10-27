@@ -1,170 +1,231 @@
 import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 export default function MinSidePage() {
   return (
-    <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="space-y-8">
+      {/* Main Navigation Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Profile Card */}
-        <Link
-          href="/min-side/profil"
-          className="group bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">👤</span>
-            <h2 className="text-xl font-semibold text-gray-900">Min profil</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Administrer din profil og kontaktinformasjon
-          </p>
-          <span className="text-blue-600 font-medium group-hover:underline">
-            Gå til profil →
-          </span>
+        <Link href="/min-side/profil" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-100 rounded-lg text-2xl">👤</div>
+                <CardTitle className="text-xl">Min profil</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Administrer din profil og kontaktinformasjon
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Gå til profil →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
 
         {/* Password Card */}
-        <Link
-          href="/min-side/passord"
-          className="group bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">🔐</span>
-            <h2 className="text-xl font-semibold text-gray-900">Passord</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Endre passord og sikkerhetsinformasjon
-          </p>
-          <span className="text-purple-600 font-medium group-hover:underline">
-            Administrer passord →
-          </span>
+        <Link href="/min-side/passord" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-100 rounded-lg text-2xl">🔐</div>
+                <CardTitle className="text-xl">Passord</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Endre passord og sikkerhetsinformasjon
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Administrer passord →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
 
         {/* Content Management */}
-        <Link
-          href="/min-side/innhold"
-          className="group bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">📄</span>
-            <h2 className="text-xl font-semibold text-gray-900">Mitt innhold</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Administrer caser, verktøy, artikler og arrangementer
-          </p>
-          <span className="text-green-600 font-medium group-hover:underline">
-            Se innhold →
-          </span>
+        <Link href="/min-side/innhold" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-green-100 rounded-lg text-2xl">📄</div>
+                <CardTitle className="text-xl">Mitt innhold</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Administrer caser, verktøy, artikler og arrangementer
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Se innhold →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
 
         {/* Consents */}
-        <Link
-          href="/min-side/samtykker"
-          className="group bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">⚙️</span>
-            <h2 className="text-xl font-semibold text-gray-900">Samtykker</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Administrer personverninnstillinger og samtykker
-          </p>
-          <span className="text-orange-600 font-medium group-hover:underline">
-            Endre samtykker →
-          </span>
+        <Link href="/min-side/samtykker" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-orange-100 rounded-lg text-2xl">⚙️</div>
+                <CardTitle className="text-xl">Samtykker</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Administrer personverninnstillinger og samtykker
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Endre samtykker →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
 
         {/* Membership */}
-        <Link
-          href="/min-side/medlemskap"
-          className="group bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">⭐</span>
-            <h2 className="text-xl font-semibold text-gray-900">Medlemskap</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Se medlemsinfo og oppgrader abonnement
-          </p>
-          <span className="text-yellow-600 font-medium group-hover:underline">
-            Se medlemskap →
-          </span>
+        <Link href="/min-side/medlemskap" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-yellow-100 rounded-lg text-2xl">⭐</div>
+                <CardTitle className="text-xl">Medlemskap</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Se medlemsinfo og oppgrader abonnement
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Se medlemskap →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
 
         {/* My Member Company */}
-        <Link
-          href="/min-side/mitt-medlem"
-          className="group bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border border-indigo-200 hover:shadow-md transition-all"
-        >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">🏢</span>
-            <h2 className="text-xl font-semibold text-gray-900">Mitt Foretak</h2>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Koble deg til ditt medlemsforetak og administrer verktøy
-          </p>
-          <span className="text-indigo-600 font-medium group-hover:underline">
-            Administrer foretak →
-          </span>
+        <Link href="/min-side/mitt-medlem" className="group">
+          <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-100 rounded-lg text-2xl">🏢</div>
+                <CardTitle className="text-xl">Mitt Foretak</CardTitle>
+              </div>
+              <CardDescription className="mt-2">
+                Koble deg til ditt medlemsforetak og administrer verktøy
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-start text-primary group-hover:translate-x-1 transition-transform">
+                Administrer foretak →
+              </Button>
+            </CardContent>
+          </Card>
         </Link>
       </div>
 
+      <Separator />
+
       {/* Quick Actions */}
-      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg border border-blue-100">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900">Hurtighandlinger</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link
-            href="/min-side/innhold?type=case&action=new"
-            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
-          >
-            <div className="text-3xl mb-2">📝</div>
-            <div className="font-semibold text-gray-900">Ny case</div>
-            <div className="text-sm text-gray-500 mt-1">Legg til prosjekt</div>
-          </Link>
-          <Link
-            href="/min-side/verktoy"
-            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
-          >
-            <div className="text-3xl mb-2">🛠️</div>
-            <div className="font-semibold text-gray-900">Nytt verktøy</div>
-            <div className="text-sm text-gray-500 mt-1">Publiser verktøy</div>
-          </Link>
-          <Link
-            href="/min-side/innhold?type=post&action=new"
-            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
-          >
-            <div className="text-3xl mb-2">📄</div>
-            <div className="font-semibold text-gray-900">Ny artikkel</div>
-            <div className="text-sm text-gray-500 mt-1">Skriv innlegg</div>
-          </Link>
-          <Link
-            href="/min-side/innhold?type=event&action=new"
-            className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-left border border-gray-200 block"
-          >
-            <div className="text-3xl mb-2">📅</div>
-            <div className="font-semibold text-gray-900">Nytt arrangement</div>
-            <div className="text-sm text-gray-500 mt-1">Opprett event</div>
-          </Link>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Hurtighandlinger</CardTitle>
+          <CardDescription>Kom raskt i gang med nye oppføringer</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link href="/min-side/innhold?type=case&action=new">
+              <Card className="hover:shadow-md transition-shadow cursor-pointer border-2 hover:border-primary/50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-4xl mb-2">📝</div>
+                    <div className="font-semibold">Ny case</div>
+                    <p className="text-sm text-muted-foreground">Legg til prosjekt</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/min-side/verktoy">
+              <Card className="hover:shadow-md transition-shadow cursor-pointer border-2 hover:border-primary/50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-4xl mb-2">🛠️</div>
+                    <div className="font-semibold">Nytt verktøy</div>
+                    <p className="text-sm text-muted-foreground">Publiser verktøy</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/min-side/innhold?type=post&action=new">
+              <Card className="hover:shadow-md transition-shadow cursor-pointer border-2 hover:border-primary/50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-4xl mb-2">📄</div>
+                    <div className="font-semibold">Ny artikkel</div>
+                    <p className="text-sm text-muted-foreground">Skriv innlegg</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/min-side/innhold?type=event&action=new">
+              <Card className="hover:shadow-md transition-shadow cursor-pointer border-2 hover:border-primary/50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-4xl mb-2">📅</div>
+                    <div className="font-semibold">Nytt arrangement</div>
+                    <p className="text-sm text-muted-foreground">Opprett event</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stats Overview */}
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-          <div className="text-3xl font-bold text-blue-600">12</div>
-          <div className="text-sm text-gray-600 mt-1">Publiserte caser</div>
-        </div>
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-          <div className="text-3xl font-bold text-green-600">8</div>
-          <div className="text-sm text-gray-600 mt-1">Verktøy</div>
-        </div>
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-          <div className="text-3xl font-bold text-purple-600">25</div>
-          <div className="text-sm text-gray-600 mt-1">Artikler</div>
-        </div>
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-          <div className="text-3xl font-bold text-orange-600">5</div>
-          <div className="text-sm text-gray-600 mt-1">Arrangementer</div>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Statistikk</CardTitle>
+          <CardDescription>Din aktivitet på BimVerdi</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center space-y-2">
+              <Badge variant="secondary" className="text-2xl px-4 py-2 bg-blue-100 text-blue-700 hover:bg-blue-100">
+                12
+              </Badge>
+              <p className="text-sm text-muted-foreground">Publiserte caser</p>
+            </div>
+            <div className="text-center space-y-2">
+              <Badge variant="secondary" className="text-2xl px-4 py-2 bg-green-100 text-green-700 hover:bg-green-100">
+                8
+              </Badge>
+              <p className="text-sm text-muted-foreground">Verktøy</p>
+            </div>
+            <div className="text-center space-y-2">
+              <Badge variant="secondary" className="text-2xl px-4 py-2 bg-purple-100 text-purple-700 hover:bg-purple-100">
+                25
+              </Badge>
+              <p className="text-sm text-muted-foreground">Artikler</p>
+            </div>
+            <div className="text-center space-y-2">
+              <Badge variant="secondary" className="text-2xl px-4 py-2 bg-orange-100 text-orange-700 hover:bg-orange-100">
+                5
+              </Badge>
+              <p className="text-sm text-muted-foreground">Arrangementer</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
