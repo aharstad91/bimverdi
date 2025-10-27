@@ -1,6 +1,6 @@
 export default function MedlemskapPage() {
   return (
-    <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
+    <div className="bg-white rounded-b-lg border border-gray-200 border-t-0 p-6">
       <div className="max-w-4xl">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Medlemskap</h2>

@@ -93,7 +93,7 @@ export default function MittMedlemPage() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
+      <div className="bg-white rounded-b-lg border border-gray-200 border-t-0 p-6">
         <div className="flex justify-center items-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
@@ -102,7 +102,7 @@ export default function MittMedlemPage() {
   }
 
   return (
-    <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
+    <div className="bg-white rounded-b-lg border border-gray-200 border-t-0 p-6">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Mitt Medlemsforetak</h1>
 

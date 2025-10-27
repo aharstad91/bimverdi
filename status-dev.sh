@@ -10,7 +10,7 @@ echo ""
 
 if [ -f "$PID_FILE" ]; then
     PID=$(cat "$PID_FILE")
-    
+
     if ps -p $PID > /dev/null 2>&1; then
         echo "✅ Server is RUNNING"
         echo "🆔 PID: $PID"

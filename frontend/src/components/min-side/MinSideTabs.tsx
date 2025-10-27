@@ -2,8 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 
 interface Tab {
   name: string;
@@ -48,8 +46,8 @@ export function MinSideTabs() {
   const pathname = usePathname();
 
   return (
-    <Card className="shadow-md">
-      <nav className="flex space-x-1 px-2 py-2 overflow-x-auto" aria-label="Tabs">
+    <div className="border-t">
+      <nav className="flex space-x-8 px-6 overflow-x-auto" aria-label="Tabs">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href;
 
@@ -58,25 +56,20 @@ export function MinSideTabs() {
               key={tab.name}
               href={tab.href}
               className={`
-                group inline-flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap rounded-lg transition-all
+                group inline-flex items-center gap-2 py-4 text-sm font-medium whitespace-nowrap border-b-2 transition-colors
                 ${
                   isActive
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300'
                 }
               `}
             >
-              <span className="text-lg">{tab.icon}</span>
+              <span className="text-base">{tab.icon}</span>
               <span>{tab.name}</span>
-              {isActive && (
-                <Badge variant="secondary" className="ml-1 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-primary-foreground/20 text-primary-foreground">
-                  ✓
-                </Badge>
-              )}
             </Link>
           );
         })}
       </nav>
-    </Card>
+    </div>
   );
 }

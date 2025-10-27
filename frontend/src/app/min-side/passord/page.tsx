@@ -11,7 +11,7 @@ export default function PassordPage() {
       <Separator />
 
       {/* Additional Security Options */}
-      <Card>
+      <Card className="border">
         <CardHeader>
           <CardTitle>Ytterligere sikkerhet</CardTitle>
           <CardDescription>Ekstra sikkerhetstiltak for kontoen din</CardDescription>

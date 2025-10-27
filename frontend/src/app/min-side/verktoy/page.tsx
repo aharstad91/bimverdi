@@ -124,7 +124,7 @@ export default function MineSideVerktoyPage() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
+      <div className="bg-white rounded-b-lg border border-gray-200 border-t-0 p-6">
         <div className="flex justify-center items-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
@@ -133,7 +133,7 @@ export default function MineSideVerktoyPage() {
   }
 
   return (
-    <div className="bg-white rounded-b-lg shadow-sm border border-gray-200 border-t-0 p-6">
+    <div className="bg-white rounded-b-lg border border-gray-200 border-t-0 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -286,7 +286,7 @@ export default function MineSideVerktoyPage() {
             {tools.map((tool) => (
               <div
                 key={tool.id}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-300 hover:shadow-md transition"
+                className="bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-lg font-semibold text-gray-900 flex-1">
