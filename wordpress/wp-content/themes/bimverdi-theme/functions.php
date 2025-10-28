@@ -9,10 +9,26 @@
 add_action('rest_api_init', function() {
     remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
     add_filter('rest_pre_serve_request', function($value) {
-        header('Access-Control-Allow-Origin: *');
+        // Get the origin from the request
+        $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+        // Allowed origins (development and production)
+        $allowed_origins = [
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'https://bimverdi.no',
+            'https://www.bimverdi.no',
+        ];
+
+        // Check if origin is allowed
+        if (in_array($origin, $allowed_origins)) {
+            header('Access-Control-Allow-Origin: ' . $origin);
+            header('Access-Control-Allow-Credentials: true');
+        }
+
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Credentials: true');
         header('Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce');
+
         return $value;
     });
 }, 15);

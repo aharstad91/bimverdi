@@ -59,6 +59,36 @@ export function RegistrationForm({
   const [errors, setErrors] = useState<FormErrors>({});
   const [serverError, setServerError] = useState<string | null>(null);
 
+  // Handle unregister
+  const handleUnregister = async () => {
+    if (!confirm('Er du sikker på at du vil avmelde deg fra dette arrangementet?')) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setServerError(null);
+
+    try {
+      const response = await fetch(
+        `/api/arrangements/my-arrangements?arrangementId=${arrangementId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Kunne ikke avmelde fra arrangement');
+      }
+
+      // Success - reload page to show registration form again
+      window.location.reload();
+    } catch (error) {
+      console.error('Unregister error:', error);
+      setServerError('Kunne ikke avmelde fra arrangementet. Vennligst prøv igjen.');
+      setIsSubmitting(false);
+    }
+  };
+
   // Show different messages based on arrangement status
   if (isCancelled) {
     return (
@@ -132,14 +162,33 @@ export function RegistrationForm({
 
   if (isRegistered) {
     return (
-      <div className="rounded-lg border border-green-200 bg-green-50 p-6">
-        <div className="flex items-start gap-3">
-          <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5" />
-          <div>
-            <h3 className="font-semibold text-green-900">Du er allerede påmeldt</h3>
-            <p className="mt-1 text-sm text-green-700">
-              Du er allerede påmeldt dette arrangementet. Du vil motta påminnelse på e-post.
-            </p>
+      <div className="space-y-4">
+        {serverError && (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
+              <p className="text-sm text-red-700">{serverError}</p>
+            </div>
+          </div>
+        )}
+        <div className="rounded-lg border border-green-200 bg-green-50 p-6">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-start gap-3 flex-1">
+              <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5" />
+              <div>
+                <h3 className="font-semibold text-green-900">Du er allerede påmeldt</h3>
+                <p className="mt-1 text-sm text-green-700">
+                  Du er allerede påmeldt dette arrangementet. Du vil motta påminnelse på e-post.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={handleUnregister}
+              disabled={isSubmitting}
+              className="px-4 py-2 text-sm font-medium text-red-700 bg-white border border-red-300 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+            >
+              {isSubmitting ? 'Avmelder...' : 'Meld av'}
+            </button>
           </div>
         </div>
       </div>
@@ -212,9 +261,8 @@ export function RegistrationForm({
     setIsSubmitting(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL?.replace('/index.php?rest_route=', '') || '';
       const response = await fetch(
-        `${apiUrl}/wp-json/bimverdi/v1/arrangement/${arrangementId}/register`,
+        `/api/arrangements/${arrangementId}/register`,
         {
           method: 'POST',
           headers: {

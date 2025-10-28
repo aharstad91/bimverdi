@@ -31,6 +31,11 @@ const tabs: Tab[] = [
     icon: '📄',
   },
   {
+    name: 'Arrangementer',
+    href: '/min-side/arrangementer',
+    icon: '📅',
+  },
+  {
     name: 'Samtykker',
     href: '/min-side/samtykker',
     icon: '⚙️',

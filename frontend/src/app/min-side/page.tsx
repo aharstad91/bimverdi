@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import MyArrangementsCard from '@/components/min-side/MyArrangementsCard';
 
 export default function MinSidePage() {
   return (
@@ -159,6 +160,9 @@ export default function MinSidePage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Arrangements Section */}
+      <MyArrangementsCard />
     </div>
   );
 }
