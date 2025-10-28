@@ -149,7 +149,10 @@ wordpress/
 │   │   ├── advanced-custom-fields/    # ACF for custom fields
 │   │   ├── wp-graphql/                # GraphQL API
 │   │   └── jwt-authentication-for-wp-rest-api/
-│   ├── themes/                        # Custom theme (if needed)
+│   ├── themes/
+│   │   └── bimverdi-theme/            # Custom theme
+│   │       ├── functions.php          # CPT registration: deltakere, tools, cases, events
+│   │       └── acf-fields.php         # ACF field definitions
 │   └── uploads/                       # User uploads (not in git)
 └── wp-config.php                      # Config (not in git)
 ```
@@ -159,8 +162,9 @@ wordpress/
 frontend/
 ├── src/
 │   ├── app/                           # App Router pages
-│   │   ├── medlemmer/                 # Members listing
+│   │   ├── deltakere/                 # Deltakere (formerly members) listing & detail
 │   │   ├── verktoy/                   # Tools catalog
+│   │   ├── min-side/                  # User dashboard (authenticated)
 │   │   └── layout.tsx                 # Root layout
 │   ├── components/                    # Reusable components
 │   │   ├── ui/                        # Generic UI components
@@ -169,7 +173,7 @@ frontend/
 │   │   ├── wordpress.ts               # WordPress API functions
 │   │   └── utils.ts                   # Helper functions
 │   └── types/                         # TypeScript type definitions
-│       └── wordpress.ts               # WP data types
+│       └── wordpress.ts               # WP data types (Deltaker, Tool, Case, Event)
 ├── public/                            # Static assets
 ├── .env.local                         # Environment variables (not in git)
 └── next.config.ts                     # Next.js config
@@ -432,19 +436,43 @@ curl -X POST http://localhost:8888/bimverdi/wordpress/graphql \
 
 Current CPTs in the project:
 
-### Members (`member`)
+### Deltakere (`deltakere`) - formerly Members
 ```typescript
-interface Member {
+interface Deltaker {
   id: number;
   title: { rendered: string };
+  slug: string;
   acf: {
-    company_logo?: string;
-    website?: string;
-    contact_email?: string;
+    company_name?: string;
+    membership_level?: 'deltaker' | 'partner' | 'prosjektdeltaker' | 'egen_avtale';
+    logo?: any;
     description?: string;
+    website?: string;
+    org_number?: string;
+    business_categories?: string[]; // Multiple categories
+    customer_types?: string[]; // Multiple customer types
+    main_contact_name?: string;
+    main_contact_title?: string;
+    main_contact_linkedin?: string;
+    contact_email?: string;
+    contact_phone?: string;
+    address?: string;
+    city?: string;
+    postal_code?: string;
+    employees?: number;
+    founded_year?: number;
+    services?: string;
+    linkedin_company?: string;
   };
 }
+
+// Note: Member is a legacy type alias for Deltaker
+type Member = Deltaker;
 ```
+
+**Routes:**
+- List: `/deltakere` - Public list of all deltakere (UL/LI table-style layout)
+- Detail: `/deltakere/[slug]` - Individual deltaker page with logo, contact info, related tools
 
 ### Tools (`tool`)
 ```typescript

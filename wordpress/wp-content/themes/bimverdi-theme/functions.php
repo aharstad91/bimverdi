@@ -20,25 +20,25 @@ add_action('rest_api_init', function() {
 // Register Custom Post Types
 function bimverdi_register_post_types() {
 
-    // Medlemsbedrifter
-    register_post_type('members', [
+    // Deltakere (tidligere Medlemsbedrifter)
+    register_post_type('deltakere', [
         'labels' => [
-            'name' => 'Medlemsbedrifter',
-            'singular_name' => 'Medlemsbedrift',
+            'name' => 'Deltakere',
+            'singular_name' => 'Deltaker',
             'add_new' => 'Legg til ny',
-            'add_new_item' => 'Legg til ny medlemsbedrift',
-            'edit_item' => 'Rediger medlemsbedrift',
-            'view_item' => 'Vis medlemsbedrift',
+            'add_new_item' => 'Legg til ny deltaker',
+            'edit_item' => 'Rediger deltaker',
+            'view_item' => 'Vis deltaker',
         ],
         'public' => true,
         'has_archive' => true,
         'show_in_rest' => true,
-        'rest_base' => 'members',
-        'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
+        'rest_base' => 'deltakere',
+        'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'],
         'menu_icon' => 'dashicons-building',
         'show_in_graphql' => true,
-        'graphql_single_name' => 'member',
-        'graphql_plural_name' => 'members',
+        'graphql_single_name' => 'deltaker',
+        'graphql_plural_name' => 'deltakere',
     ]);
 
     // Verktøy
@@ -124,7 +124,7 @@ add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
 // Disable Gutenberg for custom post types to avoid REST API conflicts
 // To re-enable: just comment out or remove this filter
 add_filter('use_block_editor_for_post_type', function($is_enabled, $post_type) {
-    $disabled_post_types = ['members', 'tools', 'cases', 'events'];
+    $disabled_post_types = ['deltakere', 'tools', 'cases', 'events'];
 
     if (in_array($post_type, $disabled_post_types)) {
         return false;

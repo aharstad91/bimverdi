@@ -22,24 +22,33 @@ export interface WPPost {
 }
 
 // Custom Post Types
-export interface Member extends WPPost {
+export interface Deltaker extends WPPost {
   acf: {
     company_name?: string;
+    membership_level?: 'deltaker' | 'partner' | 'prosjektdeltaker' | 'egen_avtale';
     logo?: any;
     description?: string;
     website?: string;
+    org_number?: string;
+    business_categories?: string[]; // architect, consultant, contractor, etc.
+    customer_types?: string[]; // client, architect, contractor, etc.
+    main_contact_name?: string;
+    main_contact_title?: string;
+    main_contact_linkedin?: string;
     contact_email?: string;
     contact_phone?: string;
     address?: string;
-    membership_level?: string;
-    services?: string[];
     city?: string;
     postal_code?: string;
-    org_number?: string;
     employees?: number;
     founded_year?: number;
+    services?: string;
+    linkedin_company?: string;
   };
 }
+
+// Legacy type alias for backwards compatibility
+export type Member = Deltaker;
 
 export interface Tool extends WPPost {
   acf: {

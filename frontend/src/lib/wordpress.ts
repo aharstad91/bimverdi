@@ -15,7 +15,7 @@ export async function fetchAPI<T>(
   options: RequestInit = {}
 ): Promise<T> {
   const url = `${WP_API_URL}${endpoint}`;
-  
+
   const response = await fetch(url, {
     ...options,
     headers: {
@@ -62,7 +62,7 @@ export async function getPostBySlug(slug: string) {
  * Fetch custom post type entries
  */
 export async function getCustomPosts<T = any>(
-  postType: 'members' | 'tools' | 'cases' | 'events',
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
   params?: {
     page?: number;
     perPage?: number;
@@ -80,7 +80,7 @@ export async function getCustomPosts<T = any>(
  * Fetch single custom post by slug
  */
 export async function getCustomPostBySlug(
-  postType: 'members' | 'tools' | 'cases' | 'events',
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
   slug: string
 ) {
   const posts = await fetchAPI(`/wp/v2/${postType}?slug=${slug}`);

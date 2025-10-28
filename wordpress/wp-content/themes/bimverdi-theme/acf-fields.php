@@ -7,16 +7,30 @@
 
 if( function_exists('acf_add_local_field_group') ):
 
-// Field Group for Members (Medlemsbedrifter)
+// Field Group for Deltakere (tidligere Members/Medlemsbedrifter)
 acf_add_local_field_group(array(
-    'key' => 'group_members',
-    'title' => 'Medlemsinformasjon',
+    'key' => 'group_deltakere',
+    'title' => 'Deltakerinformasjon',
     'fields' => array(
         array(
             'key' => 'field_company_name',
             'label' => 'Bedriftsnavn',
             'name' => 'company_name',
             'type' => 'text',
+            'required' => 1,
+        ),
+        array(
+            'key' => 'field_membership_level',
+            'label' => 'Medlemsnivå',
+            'name' => 'membership_level',
+            'type' => 'select',
+            'choices' => array(
+                'deltaker' => 'Deltaker (D)',
+                'partner' => 'Partner (P)',
+                'prosjektdeltaker' => 'Prosjektdeltaker (PD)',
+                'egen_avtale' => 'Egen avtale',
+            ),
+            'default_value' => 'deltaker',
             'required' => 1,
         ),
         array(
@@ -29,7 +43,7 @@ acf_add_local_field_group(array(
         ),
         array(
             'key' => 'field_description',
-            'label' => 'Beskrivelse',
+            'label' => 'Virksomhetsbeskrivelse',
             'name' => 'description',
             'type' => 'wysiwyg',
             'tabs' => 'all',
@@ -40,6 +54,71 @@ acf_add_local_field_group(array(
             'key' => 'field_website',
             'label' => 'Nettside',
             'name' => 'website',
+            'type' => 'url',
+        ),
+        array(
+            'key' => 'field_org_number',
+            'label' => 'Organisasjonsnummer',
+            'name' => 'org_number',
+            'type' => 'text',
+            'instructions' => 'Organisasjonsnummer (9 siffer)',
+            'maxlength' => 20,
+        ),
+        array(
+            'key' => 'field_business_categories',
+            'label' => 'Virksomhetskategorier',
+            'name' => 'business_categories',
+            'type' => 'checkbox',
+            'choices' => array(
+                'architect' => 'Arkitekt/rådgiver',
+                'consultant' => 'Rådgivende ingeniør',
+                'contractor' => 'Entreprenør/byggmester',
+                'developer' => 'Boligutvikler',
+                'client' => 'Bestiller/byggherre',
+                'producer' => 'Byggevareprodusent',
+                'retailer' => 'Byggevarehandel',
+                'property' => 'Eiendom/drift',
+                'tool_vendor' => 'Leverandør av digitale verktøy, innhold og løsninger',
+                'service_provider' => 'Tjenesteleverandør',
+                'organization' => 'Organisasjon, nettverk m.m.',
+                'public' => 'Offentlig instans',
+                'education' => 'Utdanningsinstitusjon',
+                'research' => 'Forskningsinstitutt',
+            ),
+            'layout' => 'vertical',
+        ),
+        array(
+            'key' => 'field_customer_types',
+            'label' => 'Kundetyper',
+            'name' => 'customer_types',
+            'type' => 'checkbox',
+            'choices' => array(
+                'client' => 'Bestiller/byggherre',
+                'architect' => 'Arkitekt/rådgiver',
+                'contractor' => 'Entreprenør/byggmester',
+                'producer' => 'Byggevareprodusent',
+                'retailer' => 'Byggevarehandel',
+                'property' => 'Eiendom/drift',
+                'public' => 'Offentlig sektor',
+            ),
+            'layout' => 'vertical',
+        ),
+        array(
+            'key' => 'field_main_contact_name',
+            'label' => 'Hovedkontakt - Navn',
+            'name' => 'main_contact_name',
+            'type' => 'text',
+        ),
+        array(
+            'key' => 'field_main_contact_title',
+            'label' => 'Hovedkontakt - Stilling',
+            'name' => 'main_contact_title',
+            'type' => 'text',
+        ),
+        array(
+            'key' => 'field_main_contact_linkedin',
+            'label' => 'Hovedkontakt - LinkedIn-profil',
+            'name' => 'main_contact_linkedin',
             'type' => 'url',
         ),
         array(
@@ -73,14 +152,6 @@ acf_add_local_field_group(array(
             'type' => 'text',
         ),
         array(
-            'key' => 'field_org_number',
-            'label' => 'Organisasjonsnummer',
-            'name' => 'org_number',
-            'type' => 'text',
-            'instructions' => 'Organisasjonsnummer (9 siffer)',
-            'maxlength' => 9,
-        ),
-        array(
             'key' => 'field_employees',
             'label' => 'Antall ansatte',
             'name' => 'employees',
@@ -99,13 +170,19 @@ acf_add_local_field_group(array(
             'type' => 'textarea',
             'rows' => 4,
         ),
+        array(
+            'key' => 'field_linkedin_company',
+            'label' => 'LinkedIn bedriftsside',
+            'name' => 'linkedin_company',
+            'type' => 'url',
+        ),
     ),
     'location' => array(
         array(
             array(
                 'param' => 'post_type',
                 'operator' => '==',
-                'value' => 'members',
+                'value' => 'deltakere',
             ),
         ),
     ),
@@ -197,17 +274,17 @@ acf_add_local_field_group(array(
         ),
         array(
             'key' => 'field_tool_owner_member',
-            'label' => 'Eier (Medlemsforetak)',
+            'label' => 'Eier (Deltaker)',
             'name' => 'owner_member',
             'type' => 'post_object',
             'required' => 0,
-            'post_type' => array('members'),
+            'post_type' => array('deltakere'),
             'taxonomy' => array(),
             'allow_null' => 1,
             'multiple' => 0,
             'return_format' => 'id',
             'ui' => 1,
-            'instructions' => 'Hvilket medlemsforetak eier/administrerer dette verktøyet?',
+            'instructions' => 'Hvilken deltaker eier/administrerer dette verktøyet?',
         ),
     ),
     'location' => array(
