@@ -114,6 +114,20 @@ function bimverdi_theme_support() {
 }
 add_action('after_setup_theme', 'bimverdi_theme_support');
 
+// Enqueue styles
+function bimverdi_enqueue_styles() {
+    // Arrangement CSS
+    if (is_post_type_archive('bv_arrangement') || is_singular('bv_arrangement')) {
+        wp_enqueue_style(
+            'bimverdi-arrangement',
+            get_template_directory_uri() . '/assets/css/arrangement.css',
+            array(),
+            '1.0.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'bimverdi_enqueue_styles');
+
 // Include ACF Field Groups
 require_once get_template_directory() . '/acf-fields.php';
 
