@@ -46,7 +46,14 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json();
 
-    const updateData: any = {};
+    interface UpdateData {
+      first_name?: string;
+      last_name?: string;
+      email?: string;
+      acf?: Record<string, unknown>;
+    }
+
+    const updateData: UpdateData = {};
 
     if (body.firstName) {
       updateData.first_name = body.firstName;

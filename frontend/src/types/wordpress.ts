@@ -18,7 +18,28 @@ export interface WPPost {
   featured_media: number;
   categories: number[];
   tags: number[];
-  acf?: Record<string, any>;
+  acf?: Record<string, unknown>;
+}
+
+// ACF Image Object Type
+export interface ACFImage {
+  ID: number;
+  id: number;
+  title: string;
+  filename: string;
+  url: string;
+  alt: string;
+  description: string;
+  caption: string;
+  mime_type: string;
+  width: number;
+  height: number;
+  sizes?: {
+    thumbnail?: string;
+    medium?: string;
+    large?: string;
+    [key: string]: string | undefined;
+  };
 }
 
 // Custom Post Types
@@ -26,7 +47,7 @@ export interface Deltaker extends WPPost {
   acf: {
     company_name?: string;
     membership_level?: 'deltaker' | 'partner' | 'prosjektdeltaker' | 'egen_avtale';
-    logo?: any;
+    logo?: ACFImage;
     description?: string;
     website?: string;
     org_number?: string;
@@ -61,7 +82,7 @@ export interface Tool extends WPPost {
     author?: string;
     compatibility?: string[];
     owner_member?: number; // Member post ID
-    tool_logo?: any;
+    tool_logo?: ACFImage;
     tool_description?: string;
     tool_category?: string;
     tool_vendor?: string;
@@ -82,7 +103,7 @@ export interface Case extends WPPost {
     solution?: string;
     results?: string;
     technologies?: string[];
-    images?: any[];
+    images?: ACFImage[];
     related_members?: number[];
     related_tools?: number[];
   };

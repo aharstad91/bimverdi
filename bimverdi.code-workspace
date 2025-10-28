@@ -1,0 +1,89 @@
+{
+  "folders": [
+    {
+      "name": "🎨 Frontend (Next.js)",
+      "path": "frontend"
+    },
+    {
+      "name": "📦 WordPress Backend",
+      "path": "wordpress/wp-content"
+    },
+    {
+      "name": "🗄️ Database & Scripts",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "wordpress/wp-admin": true,
+      "wordpress/wp-includes": true,
+      "wordpress/wp-content/uploads": true,
+      "wordpress/wp-content/cache": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/vendor": true,
+      "wordpress/wp-admin": true,
+      "wordpress/wp-includes": true
+    },
+    "typescript.tsdk": "frontend/node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[php]": {
+      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "emmet.includeLanguages": {
+      "typescript": "html",
+      "typescriptreact": "html"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "bmewburn.vscode-intelephense-client",
+      "bradlc.vscode-tailwindcss",
+      "GitHub.copilot",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Next.js: debug server-side",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run dev",
+        "cwd": "${workspaceFolder:🎨 Frontend (Next.js)}",
+        "serverReadyAction": {
+          "pattern": "- Local:.+(https?://.+)",
+          "uriFormat": "%s",
+          "action": "debugWithChrome"
+        }
+      },
+      {
+        "name": "Next.js: debug client-side",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder:🎨 Frontend (Next.js)}"
+      }
+    ]
+  }
+}

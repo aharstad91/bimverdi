@@ -52,8 +52,9 @@ export default function NyttVerktoyPage() {
 
       // Redirect back to tools list after success
       setTimeout(() => router.push('/min-side/verktoy'), 1500);
-    } catch (error: any) {
-      setMessage({ type: 'error', text: error.message || 'Feil ved opprettelse' });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Feil ved opprettelse';
+      setMessage({ type: 'error', text: errorMessage });
     } finally {
       setSubmitting(false);
     }

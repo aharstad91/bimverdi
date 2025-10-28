@@ -59,7 +59,7 @@ export async function getPostBySlug(slug: string) {
 /**
  * Fetch custom post type entries
  */
-export async function getCustomPosts<T = any>(
+export async function getCustomPosts<T>(
   postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events' | 'arrangement',
   params?: {
     page?: number;
