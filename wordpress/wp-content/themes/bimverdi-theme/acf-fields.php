@@ -536,4 +536,191 @@ acf_add_local_field_group(array(
     ),
 ));
 
+// Field Group for bv_arrangement (Arrangement MVP)
+acf_add_local_field_group(array(
+    'key' => 'group_bv_arrangement',
+    'title' => 'Arrangementdetaljer',
+    'show_in_rest' => true,
+    'fields' => array(
+        // Dato og tid
+        array(
+            'key' => 'field_arrangement_dato_start',
+            'label' => 'Startdato',
+            'name' => 'dato_start',
+            'type' => 'date_picker',
+            'instructions' => 'Dato for når arrangementet starter',
+            'required' => 1,
+            'display_format' => 'd.m.Y',
+            'return_format' => 'Ymd',
+            'first_day' => 1,
+        ),
+        array(
+            'key' => 'field_arrangement_tidspunkt_start',
+            'label' => 'Starttidspunkt',
+            'name' => 'tidspunkt_start',
+            'type' => 'time_picker',
+            'instructions' => 'Klokkeslett for start (f.eks. 09:00)',
+            'required' => 1,
+            'display_format' => 'H:i',
+            'return_format' => 'H:i',
+        ),
+        array(
+            'key' => 'field_arrangement_pameldingsfrist',
+            'label' => 'Påmeldingsfrist',
+            'name' => 'pameldingsfrist',
+            'type' => 'date_time_picker',
+            'instructions' => 'Siste frist for påmelding',
+            'required' => 1,
+            'display_format' => 'd.m.Y H:i',
+            'return_format' => 'Y-m-d H:i:s',
+            'first_day' => 1,
+        ),
+        
+        // Lokasjon
+        array(
+            'key' => 'field_arrangement_moteformat',
+            'label' => 'Møteformat',
+            'name' => 'moteformat',
+            'type' => 'select',
+            'instructions' => 'Velg om arrangementet er fysisk, digitalt eller hybrid',
+            'required' => 1,
+            'choices' => array(
+                'fysisk' => 'Fysisk møte',
+                'digitalt' => 'Digitalt møte',
+                'hybrid' => 'Hybrid (både fysisk og digitalt)',
+            ),
+            'default_value' => 'fysisk',
+        ),
+        array(
+            'key' => 'field_arrangement_adresse',
+            'label' => 'Adresse',
+            'name' => 'adresse',
+            'type' => 'text',
+            'instructions' => 'Gateadresse for fysisk møte',
+            'conditional_logic' => array(
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'fysisk',
+                    ),
+                ),
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'hybrid',
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'key' => 'field_arrangement_poststed',
+            'label' => 'Poststed',
+            'name' => 'poststed',
+            'type' => 'text',
+            'instructions' => 'By/sted for arrangementet',
+            'conditional_logic' => array(
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'fysisk',
+                    ),
+                ),
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'hybrid',
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'key' => 'field_arrangement_digital_link',
+            'label' => 'Digital møtelenke',
+            'name' => 'digital_link',
+            'type' => 'url',
+            'instructions' => 'Lenke til Teams, Zoom, etc.',
+            'conditional_logic' => array(
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'digitalt',
+                    ),
+                ),
+                array(
+                    array(
+                        'field' => 'field_arrangement_moteformat',
+                        'operator' => '==',
+                        'value' => 'hybrid',
+                    ),
+                ),
+            ),
+        ),
+        
+        // Kapasitet og tilgang
+        array(
+            'key' => 'field_arrangement_maks_deltakere',
+            'label' => 'Maks antall deltakere',
+            'name' => 'maks_deltakere',
+            'type' => 'number',
+            'instructions' => 'Sett til 0 for ubegrenset antall',
+            'default_value' => 0,
+            'min' => 0,
+        ),
+        array(
+            'key' => 'field_arrangement_kun_for_medlemmer',
+            'label' => 'Kun for medlemmer',
+            'name' => 'kun_for_medlemmer',
+            'type' => 'true_false',
+            'instructions' => 'Kun innloggede medlemmer kan melde seg på',
+            'message' => 'Dette arrangementet er kun for BIMVerdi-medlemmer',
+            'default_value' => 0,
+            'ui' => 1,
+        ),
+        array(
+            'key' => 'field_arrangement_status',
+            'label' => 'Status',
+            'name' => 'arrangement_status',
+            'type' => 'select',
+            'instructions' => 'Nåværende status for arrangementet',
+            'required' => 1,
+            'choices' => array(
+                'kommende' => 'Kommende',
+                'paamelding_aapen' => 'Påmelding åpen',
+                'fullbooket' => 'Fullbooket',
+                'avlyst' => 'Avlyst',
+            ),
+            'default_value' => 'kommende',
+        ),
+        
+        // Gravity Forms integrasjon
+        array(
+            'key' => 'field_arrangement_gf_form_id',
+            'label' => 'Gravity Forms ID',
+            'name' => 'gf_form_id',
+            'type' => 'number',
+            'instructions' => 'ID for Gravity Forms påmeldingsskjema (opprett skjemaet først)',
+            'min' => 1,
+        ),
+    ),
+    'location' => array(
+        array(
+            array(
+                'param' => 'post_type',
+                'operator' => '==',
+                'value' => 'bv_arrangement',
+            ),
+        ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+));
+
 endif;

@@ -117,6 +117,10 @@ add_action('after_setup_theme', 'bimverdi_theme_support');
 // Include ACF Field Groups
 require_once get_template_directory() . '/acf-fields.php';
 
+// Include Arrangement CPT and Functions
+require_once get_template_directory() . '/inc/arrangement-cpt.php';
+require_once get_template_directory() . '/inc/arrangement-functions.php';
+
 // Enable ACF REST API support
 add_filter('acf/settings/rest_api_enabled', '__return_true');
 add_filter('acf/rest_api/field_settings/show_in_rest', '__return_true');
