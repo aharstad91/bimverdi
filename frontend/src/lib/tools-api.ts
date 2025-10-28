@@ -27,24 +27,29 @@ export interface ToolFormData {
  */
 export async function getMyTools(userId: number): Promise<Tool[]> {
   try {
-    const response = await fetch(
-      `${API_BASE}/bimverdi/v1/tools/my-tools?user_id=${userId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const url = `${API_BASE}/bimverdi/v1/tools/my-tools&user_id=${userId}`;
+    console.log('🌐 Fetching tools from:', url);
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('📡 Response status:', response.status);
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Failed to fetch tools:', errorText);
       throw new Error('Failed to fetch tools');
     }
 
     const data = await response.json();
+    console.log('📦 Response data:', data);
     return data.tools || [];
   } catch (error) {
-    console.error('Error fetching tools:', error);
+    console.error('❌ Error fetching tools:', error);
     return [];
   }
 }
@@ -118,7 +123,7 @@ export async function updateTool(userId: number, toolId: number, toolData: Parti
 export async function deleteTool(userId: number, toolId: number): Promise<boolean> {
   try {
     const response = await fetch(
-      `${API_BASE}/bimverdi/v1/tools/${toolId}?user_id=${userId}`,
+      `${API_BASE}/bimverdi/v1/tools/${toolId}&user_id=${userId}`,
       {
         method: 'DELETE',
         headers: {

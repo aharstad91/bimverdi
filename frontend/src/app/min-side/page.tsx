@@ -28,18 +28,27 @@ export default function MinSidePage() {
           <CardContent>
             <div className="space-y-2">
               <Link href="/min-side/profil">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  <span className="mr-2">👤</span> Min profil
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>👤</span> Min profil
+                  </span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
               <Link href="/min-side/passord">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  <span className="mr-2">🔐</span> Passord
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>🔐</span> Passord
+                  </span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
               <Link href="/min-side/samtykker">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  <span className="mr-2">⚙️</span> Samtykker
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>⚙️</span> Samtykker
+                  </span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
             </div>
@@ -55,7 +64,7 @@ export default function MinSidePage() {
                 <CardTitle className="text-xl">Mitt innhold</CardTitle>
               </div>
               <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100">
-                45 totalt
+                20 totalt
               </Badge>
             </div>
             <CardDescription className="mt-2">
@@ -64,48 +73,43 @@ export default function MinSidePage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {/* Stats */}
-              <div className="grid grid-cols-4 gap-2 text-center text-xs">
-                <div className="space-y-1">
-                  <div className="font-semibold text-blue-700">12</div>
-                  <div className="text-muted-foreground">Caser</div>
+              {/* Stats with CTAs in boxes */}
+              <div className="grid grid-cols-2 gap-3">
+                {/* Caser Box */}
+                <div className="border rounded-lg p-4 space-y-3">
+                  <div className="text-center space-y-1">
+                    <div className="font-semibold text-blue-700 text-2xl">12</div>
+                    <div className="text-sm text-muted-foreground">Caser</div>
+                  </div>
+                  <Link href="/min-side/innhold?type=case&action=new">
+                    <Button variant="outline" size="sm" className="w-full justify-start text-xs cursor-pointer">
+                      <span className="mr-1">📝</span> Ny case
+                    </Button>
+                  </Link>
                 </div>
-                <div className="space-y-1">
-                  <div className="font-semibold text-green-700">8</div>
-                  <div className="text-muted-foreground">Verktøy</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="font-semibold text-purple-700">25</div>
-                  <div className="text-muted-foreground">Artikler</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="font-semibold text-orange-700">5</div>
-                  <div className="text-muted-foreground">Events</div>
+
+                {/* Verktøy Box */}
+                <div className="border rounded-lg p-4 space-y-3">
+                  <div className="text-center space-y-1">
+                    <div className="font-semibold text-green-700 text-2xl">8</div>
+                    <div className="text-sm text-muted-foreground">Verktøy</div>
+                  </div>
+                  <Link href="/min-side/verktoy?action=new">
+                    <Button variant="outline" size="sm" className="w-full justify-start text-xs cursor-pointer">
+                      <span className="mr-1">�️</span> Nytt verktøy
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
               <Separator />
 
               <Link href="/min-side/innhold" className="block">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  Se alt innhold →
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span>Se alt innhold</span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
-
-              <Separator />
-
-              <div className="grid grid-cols-2 gap-2">
-                <Link href="/min-side/innhold?type=case&action=new">
-                  <Button variant="outline" size="sm" className="w-full justify-start text-xs">
-                    <span className="mr-1">📝</span> Ny case
-                  </Button>
-                </Link>
-                <Link href="/min-side/innhold?type=post&action=new">
-                  <Button variant="outline" size="sm" className="w-full justify-start text-xs">
-                    <span className="mr-1">📄</span> Ny artikkel
-                  </Button>
-                </Link>
-              </div>
             </div>
           </CardContent>
         </Card>
@@ -129,13 +133,19 @@ export default function MinSidePage() {
           <CardContent>
             <div className="space-y-2">
               <Link href="/min-side/medlemskap">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  <span className="mr-2">⭐</span> Medlemskap
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>⭐</span> Medlemskap
+                  </span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
               <Link href="/min-side/mitt-medlem">
-                <Button variant="ghost" className="w-full justify-start text-primary hover:translate-x-1 transition-transform">
-                  <span className="mr-2">🏢</span> Mitt Foretak
+                <Button variant="outline" className="w-full justify-between text-primary hover:translate-x-1 transition-transform border group cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>🏢</span> Mitt Foretak
+                  </span>
+                  <span className="opacity-50 group-hover:opacity-100 transition-opacity">→</span>
                 </Button>
               </Link>
               <Separator />
