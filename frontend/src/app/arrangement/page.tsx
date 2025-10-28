@@ -57,7 +57,7 @@ function ArrangementCard({ arrangement }: { arrangement: Arrangement }) {
     const month = dateStr.substring(4, 6);
     const day = dateStr.substring(6, 8);
     const date = new Date(`${year}-${month}-${day}`);
-    
+
     return date.toLocaleDateString('no-NO', {
       day: 'numeric',
       month: 'long',

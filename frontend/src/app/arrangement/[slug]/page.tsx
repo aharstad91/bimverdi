@@ -42,12 +42,12 @@ export default async function ArrangementPage({ params }: Props) {
     const month = dateStr.substring(4, 6);
     const day = dateStr.substring(6, 8);
     const date = new Date(`${year}-${month}-${day}`);
-    
+
     const months = [
       'januar', 'februar', 'mars', 'april', 'mai', 'juni',
       'juli', 'august', 'september', 'oktober', 'november', 'desember'
     ];
-    
+
     return `${parseInt(day)}. ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
@@ -95,7 +95,7 @@ export default async function ArrangementPage({ params }: Props) {
                   <h1 className="text-4xl font-bold text-gray-900 mb-4">
                     {arrangement.title.rendered}
                   </h1>
-                  
+
                   <div className="flex items-center gap-3 text-sm">
                     {acf?.moteformat && (
                       <span className="px-3 py-1 bg-gray-100 rounded text-gray-700">
@@ -106,7 +106,7 @@ export default async function ArrangementPage({ params }: Props) {
                 </header>
 
                 {/* Content Body */}
-                <div 
+                <div
                   className="prose max-w-none text-gray-700"
                   dangerouslySetInnerHTML={{ __html: arrangement.content.rendered }}
                 />
@@ -183,11 +183,11 @@ export default async function ArrangementPage({ params }: Props) {
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Påmelding
               </h3>
-              
+
               <div className="bg-yellow-50 border border-yellow-200 rounded p-4 text-sm text-yellow-800">
                 <p className="font-semibold mb-2">ℹ️ Merk</p>
                 <p>Påmeldingsskjema (Gravity Forms) vises kun på WordPress-siden:</p>
-                <a 
+                <a
                   href={`http://localhost:8888/bimverdi/wordpress/arrangement/${slug}/`}
                   target="_blank"
                   rel="noopener noreferrer"
