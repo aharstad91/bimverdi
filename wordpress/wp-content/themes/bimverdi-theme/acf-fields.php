@@ -11,6 +11,7 @@ if( function_exists('acf_add_local_field_group') ):
 acf_add_local_field_group(array(
     'key' => 'group_deltakere',
     'title' => 'Deltakerinformasjon',
+    'show_in_rest' => true,
     'fields' => array(
         array(
             'key' => 'field_company_name',
@@ -192,6 +193,7 @@ acf_add_local_field_group(array(
 acf_add_local_field_group(array(
     'key' => 'group_tools',
     'title' => 'Verktøyinformasjon',
+    'show_in_rest' => true,
     'fields' => array(
         array(
             'key' => 'field_tool_name',

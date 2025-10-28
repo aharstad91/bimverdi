@@ -29,9 +29,7 @@ export async function fetchAPI<T>(
   }
 
   return response.json();
-}
-
-/**
+}/**
  * Fetch posts from WordPress
  */
 export async function getPosts(params?: {
@@ -47,14 +45,14 @@ export async function getPosts(params?: {
   if (params?.tags) searchParams.set('tags', params.tags);
 
   const query = searchParams.toString();
-  return fetchAPI(`/wp/v2/posts${query ? `?${query}` : ''}`);
+  return fetchAPI(`/wp/v2/posts${query ? `&${query}` : ''}`);
 }
 
 /**
  * Fetch single post by slug
  */
 export async function getPostBySlug(slug: string) {
-  const posts = await fetchAPI(`/wp/v2/posts?slug=${slug}`);
+  const posts = await fetchAPI(`/wp/v2/posts&slug=${slug}`);
   return Array.isArray(posts) && posts.length > 0 ? posts[0] : null;
 }
 
@@ -73,7 +71,7 @@ export async function getCustomPosts<T = any>(
   if (params?.perPage) searchParams.set('per_page', params.perPage.toString());
 
   const query = searchParams.toString();
-  return fetchAPI<T[]>(`/wp/v2/${postType}${query ? `?${query}` : ''}`);
+  return fetchAPI<T[]>(`/wp/v2/${postType}${query ? `&${query}` : ''}`);
 }
 
 /**
@@ -83,13 +81,23 @@ export async function getCustomPostBySlug(
   postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
   slug: string
 ) {
-  const posts = await fetchAPI(`/wp/v2/${postType}?slug=${slug}`);
+  const posts = await fetchAPI(`/wp/v2/${postType}&slug=${slug}`);
   return Array.isArray(posts) && posts.length > 0 ? posts[0] : null;
+}
+
+/**
+ * Fetch single custom post by ID
+ */
+export async function getCustomPostById(
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
+  id: number
+) {
+  return fetchAPI(`/wp/v2/${postType}/${id}`);
 }
 
 /**
  * Fetch ACF fields for a post
  */
 export async function getACFFields(postType: string, postId: number) {
-  return fetchAPI(`/wp/v2/${postType}/${postId}?acf_format=standard`);
+  return fetchAPI(`/wp/v2/${postType}/${postId}&acf_format=standard`);
 }
