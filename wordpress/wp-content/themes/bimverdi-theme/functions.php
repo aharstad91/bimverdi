@@ -134,6 +134,7 @@ require_once get_template_directory() . '/acf-fields.php';
 // Include Arrangement CPT and Functions
 require_once get_template_directory() . '/inc/arrangement-cpt.php';
 require_once get_template_directory() . '/inc/arrangement-functions.php';
+require_once get_template_directory() . '/inc/arrangement-api.php';
 
 // Enable ACF REST API support
 add_filter('acf/settings/rest_api_enabled', '__return_true');

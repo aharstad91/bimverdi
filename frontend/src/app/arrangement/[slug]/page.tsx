@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getCustomPostBySlug } from '@/lib/wordpress';
 import { Arrangement } from '@/types/wordpress';
+import { RegistrationForm } from '@/components/arrangement/RegistrationForm';
+import { getSession } from '@/lib/session';
+import { getUserProfile } from '@/lib/auth';
 
 export const revalidate = 3600;
 
@@ -31,6 +34,37 @@ export default async function ArrangementPage({ params }: Props) {
 
   if (!arrangement) {
     notFound();
+  }
+
+  // Get user session for pre-filling form
+  const session = await getSession();
+
+  // Fetch full user profile if logged in (to get phone and company)
+  let userProfile = null;
+  if (session.isLoggedIn && session.userId) {
+    try {
+      userProfile = await getUserProfile(session.userId);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  }
+
+  // Check if user is already registered (only if logged in)
+  let isRegistered = false;
+  if (session.isLoggedIn && session.email) {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL?.replace('/index.php?rest_route=', '') || '';
+      const checkUrl = `${apiUrl}/wp-json/bimverdi/v1/arrangement/${arrangement.id}/check-registration?email=${encodeURIComponent(session.email)}`;
+      const checkResponse = await fetch(checkUrl, {
+        cache: 'no-store' // Don't cache this check
+      });
+      if (checkResponse.ok) {
+        const checkData = await checkResponse.json();
+        isRegistered = checkData.registered || false;
+      }
+    } catch (error) {
+      console.error('Error checking registration status:', error);
+    }
   }
 
   const { acf } = arrangement;
@@ -72,6 +106,14 @@ export default async function ArrangementPage({ params }: Props) {
   };
 
   const statusBadge = getStatusBadge(acf?.arrangement_status);
+
+  // Determine if user can register
+  const now = new Date();
+  const deadlineDate = acf?.pameldingsfrist ? new Date(acf.pameldingsfrist) : null;
+  const isDeadlinePassed = deadlineDate ? now > deadlineDate : false;
+  const isFull = acf?.arrangement_status === 'fullbooket';
+  const isCancelled = acf?.arrangement_status === 'avlyst';
+  const membersOnly = acf?.kun_for_medlemmer || false;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -179,24 +221,20 @@ export default async function ArrangementPage({ params }: Props) {
             </div>
 
             {/* Påmelding */}
-            <div className="bg-blue-50 rounded-lg border-2 border-blue-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                Påmelding
-              </h3>
-
-              <div className="bg-yellow-50 border border-yellow-200 rounded p-4 text-sm text-yellow-800">
-                <p className="font-semibold mb-2">ℹ️ Merk</p>
-                <p>Påmeldingsskjema (Gravity Forms) vises kun på WordPress-siden:</p>
-                <a
-                  href={`http://localhost:8888/bimverdi/wordpress/arrangement/${slug}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline font-semibold block mt-2"
-                >
-                  → Gå til påmeldingsside
-                </a>
-              </div>
-            </div>
+            <RegistrationForm
+              arrangementId={arrangement.id}
+              arrangementTitle={arrangement.title.rendered}
+              isLoggedIn={session.isLoggedIn}
+              userEmail={session.email || ''}
+              userName={session.firstName && session.lastName ? `${session.firstName} ${session.lastName}` : ''}
+              userPhone={userProfile?.acf?.phone || ''}
+              userCompany={userProfile?.acf?.company || ''}
+              isFull={isFull}
+              isDeadlinePassed={isDeadlinePassed}
+              membersOnly={membersOnly}
+              isCancelled={isCancelled}
+              isRegistered={isRegistered}
+            />
           </aside>
         </div>
       </div>
