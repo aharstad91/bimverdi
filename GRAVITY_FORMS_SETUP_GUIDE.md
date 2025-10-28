@@ -258,9 +258,9 @@ Se alle påmeldinger i Gravity Forms admin.
 
 ```sql
 -- Oppdater gf_form_id for test-arrangement
-UPDATE wp_postmeta 
-SET meta_value = '1' 
-WHERE post_id = 26 
+UPDATE wp_postmeta
+SET meta_value = '1'
+WHERE post_id = 26
 AND meta_key = 'gf_form_id';
 ```
 
@@ -290,7 +290,7 @@ echo "UPDATE wp_postmeta SET meta_value = '1' WHERE post_id = 26 AND meta_key = 
    - Kommentarer: `Dette er en test`
    - ✅ Godta vilkår
 2. Klikk **Send inn**
-3. **Forventet resultat:** 
+3. **Forventet resultat:**
    - ✅ Bekreftelsesmelding vises
    - 📧 E-post sendes til `test@example.com` og `post@bimverdi.no`
 
@@ -427,5 +427,5 @@ Hvis du støter på problemer:
 
 ---
 
-**Sist oppdatert:** 28. oktober 2025  
+**Sist oppdatert:** 28. oktober 2025
 **Versjon:** 1.0 (MVP)

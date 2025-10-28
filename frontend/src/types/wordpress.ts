@@ -104,6 +104,23 @@ export interface Event extends WPPost {
   };
 }
 
+export interface Arrangement extends WPPost {
+  acf: {
+    dato_start?: string; // YYYYMMDD format
+    tidspunkt_start?: string; // HH:mm format
+    pameldingsfrist?: string; // Y-m-d H:i:s format
+    moteformat?: 'fysisk' | 'digitalt' | 'hybrid';
+    adresse?: string;
+    poststed?: string;
+    digital_link?: string;
+    maks_deltakere?: number;
+    kun_for_medlemmer?: boolean;
+    arrangement_status?: 'kommende' | 'paamelding_aapen' | 'fullbooket' | 'avlyst';
+    gf_form_id?: number;
+  };
+  arrangement_type?: number[]; // Taxonomy term IDs
+}
+
 // User/Profile Types
 export interface UserProfile {
   id: number;

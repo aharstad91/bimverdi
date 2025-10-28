@@ -85,7 +85,7 @@ $formatted_date = bv_format_date($dato_start);
                     <span class="capacity-count"><?php echo $pameldte_count; ?> / <?php echo $maks_deltakere; ?> påmeldt</span>
                 </div>
             <?php endif; ?>
-            
+
             <a href="<?php the_permalink(); ?>" class="btn-more">
                 Les mer →
             </a>

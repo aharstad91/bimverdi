@@ -575,7 +575,7 @@ acf_add_local_field_group(array(
             'return_format' => 'Y-m-d H:i:s',
             'first_day' => 1,
         ),
-        
+
         // Lokasjon
         array(
             'key' => 'field_arrangement_moteformat',
@@ -660,7 +660,7 @@ acf_add_local_field_group(array(
                 ),
             ),
         ),
-        
+
         // Kapasitet og tilgang
         array(
             'key' => 'field_arrangement_maks_deltakere',
@@ -696,7 +696,7 @@ acf_add_local_field_group(array(
             ),
             'default_value' => 'kommende',
         ),
-        
+
         // Gravity Forms integrasjon
         array(
             'key' => 'field_arrangement_gf_form_id',

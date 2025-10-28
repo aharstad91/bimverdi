@@ -8,7 +8,7 @@ get_header();
 
 while (have_posts()) : the_post();
     $post_id = get_the_ID();
-    
+
     // Hent ACF-felt
     $dato_start = get_field('dato_start');
     $tidspunkt = get_field('tidspunkt_start');
@@ -21,11 +21,11 @@ while (have_posts()) : the_post();
     $kun_for_medlemmer = get_field('kun_for_medlemmer');
     $status = get_field('arrangement_status');
     $gf_form_id = get_field('gf_form_id');
-    
+
     // Hent arrangement-typer
     $types = get_the_terms($post_id, 'arrangement_type');
     $type_name = $types && !is_wp_error($types) ? $types[0]->name : '';
-    
+
     // Sjekk tilgangskontroll
     $is_user_logged_in = is_user_logged_in();
     $is_member = bv_user_is_medlem();
@@ -33,15 +33,15 @@ while (have_posts()) : the_post();
     $is_full = bv_is_arrangement_full($post_id);
     $is_registration_closed = bv_is_registration_closed($post_id);
     $pameldte_count = bv_get_pameldte_count($post_id);
-    
+
     // Format icon
     $format_icon = bv_get_format_icon($moteformat);
     $formatted_date = bv_format_date($dato_start);
-    
+
     // Kan brukeren melde seg på?
     $can_register = true;
     $register_message = '';
-    
+
     if ($status === 'avlyst') {
         $can_register = false;
         $register_message = '⚠️ Dette arrangementet er avlyst.';
@@ -75,9 +75,9 @@ while (have_posts()) : the_post();
                         <?php if ($type_name) : ?>
                             <span class="arrangement-type-badge"><?php echo esc_html($type_name); ?></span>
                         <?php endif; ?>
-                        
+
                         <h1 class="arrangement-title"><?php the_title(); ?></h1>
-                        
+
                         <div class="arrangement-status-bar">
                             <span class="status-badge status-<?php echo esc_attr($status); ?>">
                                 <?php echo esc_html(bv_get_status_label($status)); ?>
@@ -97,19 +97,19 @@ while (have_posts()) : the_post();
                 <aside class="arrangement-sidebar">
                     <div class="sidebar-widget praktisk-info">
                         <h3>Praktisk informasjon</h3>
-                        
+
                         <div class="info-item">
                             <strong>📅 Dato:</strong>
                             <span><?php echo esc_html($formatted_date); ?></span>
                         </div>
-                        
+
                         <?php if ($tidspunkt) : ?>
                             <div class="info-item">
                                 <strong>🕐 Tid:</strong>
                                 <span><?php echo esc_html($tidspunkt); ?></span>
                             </div>
                         <?php endif; ?>
-                        
+
                         <?php if ($moteformat === 'fysisk' || $moteformat === 'hybrid') : ?>
                             <?php if ($adresse) : ?>
                                 <div class="info-item">
@@ -124,7 +124,7 @@ while (have_posts()) : the_post();
                                 </div>
                             <?php endif; ?>
                         <?php endif; ?>
-                        
+
                         <?php if (($moteformat === 'digitalt' || $moteformat === 'hybrid') && $digital_link && $is_registered) : ?>
                             <div class="info-item">
                                 <strong>💻 Digital lenke:</strong>
@@ -133,14 +133,14 @@ while (have_posts()) : the_post();
                                 </a>
                             </div>
                         <?php endif; ?>
-                        
+
                         <?php if ($pameldingsfrist) : ?>
                             <div class="info-item">
                                 <strong>⏰ Påmeldingsfrist:</strong>
                                 <span><?php echo date('d.m.Y H:i', strtotime($pameldingsfrist)); ?></span>
                             </div>
                         <?php endif; ?>
-                        
+
                         <?php if ($maks_deltakere > 0) : ?>
                             <div class="info-item capacity-info">
                                 <strong>👥 Kapasitet:</strong>
@@ -152,7 +152,7 @@ while (have_posts()) : the_post();
                     <!-- Registration Form -->
                     <div class="sidebar-widget pamelding-widget">
                         <h3>Påmelding</h3>
-                        
+
                         <?php if (!$can_register) : ?>
                             <div class="register-message">
                                 <?php echo $register_message; ?>

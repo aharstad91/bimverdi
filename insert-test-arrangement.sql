@@ -112,8 +112,8 @@ INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (@post_id, 'gf_fo
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (@post_id, '_gf_form_id', 'field_arrangement_gf_form_id');
 
 -- Output success message
-SELECT 
+SELECT
     CONCAT('✅ Test arrangement created with ID: ', @post_id) AS message,
     CONCAT('http://localhost:8888/bimverdi/wordpress/arrangement/', post_name) AS url
-FROM wp_posts 
+FROM wp_posts
 WHERE ID = @post_id;

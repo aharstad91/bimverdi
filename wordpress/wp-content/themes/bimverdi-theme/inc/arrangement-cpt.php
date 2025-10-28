@@ -1,7 +1,7 @@
 <?php
 /**
  * Custom Post Type: Arrangement (bv_arrangement)
- * 
+ *
  * Registrerer CPT for arrangementer med taxonomy
  */
 

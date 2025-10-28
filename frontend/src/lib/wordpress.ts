@@ -60,7 +60,7 @@ export async function getPostBySlug(slug: string) {
  * Fetch custom post type entries
  */
 export async function getCustomPosts<T = any>(
-  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events' | 'arrangement',
   params?: {
     page?: number;
     perPage?: number;
@@ -78,7 +78,7 @@ export async function getCustomPosts<T = any>(
  * Fetch single custom post by slug
  */
 export async function getCustomPostBySlug(
-  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events' | 'arrangement',
   slug: string
 ) {
   const posts = await fetchAPI(`/wp/v2/${postType}&slug=${slug}`);
@@ -89,7 +89,7 @@ export async function getCustomPostBySlug(
  * Fetch single custom post by ID
  */
 export async function getCustomPostById(
-  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events',
+  postType: 'deltakere' | 'members' | 'tools' | 'cases' | 'events' | 'arrangement',
   id: number
 ) {
   return fetchAPI(`/wp/v2/${postType}/${id}`);
