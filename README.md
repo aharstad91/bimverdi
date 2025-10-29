@@ -25,27 +25,19 @@ npm run dev
 # WP Admin:  http://localhost:8888/bimverdi/wordpress/wp-admin
 ```
 
-**First time setup?** → Read [`SETUP.md`](SETUP.md)
-
 ---
 
 ## 📚 Documentation
 
 ### Getting Started
-- **[SETUP.md](SETUP.md)** - Complete setup guide for new developers
-- **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** - Daily development workflow & reference
+- **[docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)** - Complete development workflow & reference
 - **[.github/copilot-instructions.md](.github/copilot-instructions.md)** - AI assistant context & coding standards
 
-### Deployment
-- **[DEPLOYMENT_QUICKREF.md](DEPLOYMENT_QUICKREF.md)** - Quick deployment reference
-- **[SERVEBOLT_DEPLOYMENT.md](SERVEBOLT_DEPLOYMENT.md)** - Servebolt-specific deployment guide
-
-### Legacy Documentation
-- `TECH_AUDIT.md` - Technical audit (superseded by DEVELOPER_GUIDE.md)
-- `ENVIRONMENT_INSTRUCTIONS.md` - Environment instructions (superseded by DEVELOPER_GUIDE.md)
-- `INSTALL_WORDPRESS.md` - Installation guide (superseded by SETUP.md)
-- `WORDPRESS_SETUP.md` - Setup guide (superseded by SETUP.md)
-- `NEXT_STEPS.md` - Project roadmap
+### Deployment & Setup
+- **[docs/DEPLOYMENT_QUICKREF.md](docs/DEPLOYMENT_QUICKREF.md)** - Quick deployment reference
+- **[docs/SERVEBOLT_DEPLOYMENT.md](docs/SERVEBOLT_DEPLOYMENT.md)** - Servebolt-specific deployment
+- **[docs/GRAVITY_FORMS_SETUP_GUIDE.md](docs/GRAVITY_FORMS_SETUP_GUIDE.md)** - Forms configuration
+- **[docs/ARRANGEMENT_MVP_STATUS_TODO.md](docs/ARRANGEMENT_MVP_STATUS_TODO.md)** - Arrangement feature status
 
 ---
 
@@ -83,6 +75,11 @@ npm run dev
 
 ```
 bimverdi/
+├── docs/                   # 📚 All documentation
+│   ├── DEVELOPER_GUIDE.md
+│   ├── DEPLOYMENT_QUICKREF.md
+│   └── ...
+│
 ├── wordpress/              # WordPress backend (CMS)
 │   ├── wp-content/
 │   │   ├── plugins/       # ACF, WPGraphQL, JWT
@@ -246,7 +243,7 @@ wp user list         # List users
 - [ ] Deploy WordPress to Servebolt
 - [ ] Deploy Next.js to Vercel
 
-**Full guide**: See [`SERVEBOLT_DEPLOYMENT.md`](SERVEBOLT_DEPLOYMENT.md)
+**Full guide**: See [`docs/SERVEBOLT_DEPLOYMENT.md`](docs/SERVEBOLT_DEPLOYMENT.md)
 
 ---
 
@@ -271,7 +268,7 @@ ps aux | grep mysql
 WP Admin → Settings → Permalinks → Save Changes
 ```
 
-**More help**: See [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md#troubleshooting)
+**More help**: See [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md#troubleshooting)
 
 ---
 
@@ -287,7 +284,7 @@ WP Admin → Settings → Permalinks → Save Changes
 
 ## 📞 Support
 
-- **Documentation**: Start with [`SETUP.md`](SETUP.md) or [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md)
+- **Documentation**: Start with [`docs/DEVELOPER_GUIDE.md`](docs/DEVELOPER_GUIDE.md)
 - **AI Assistant**: Context in [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
 - **Issues**: Check troubleshooting section in developer guide
 
@@ -299,4 +296,4 @@ Proprietary - BimVerdi Project
 
 ---
 
-**Last Updated**: October 22, 2025
+**Last Updated**: October 28, 2025

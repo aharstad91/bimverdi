@@ -22,7 +22,7 @@ export default function Header() {
               <Link href="/caser" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
                 Caser
               </Link>
-              <Link href="/arrangementer" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
+              <Link href="/arrangement" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
                 Arrangementer
               </Link>
             </div>

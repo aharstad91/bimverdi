@@ -1,0 +1,474 @@
+/**
+ * Arrangement Styling
+ * CSS for BIMVerdi Arrangement MVP
+ */
+
+/* ============================================
+   Archive Page - Grid Layout
+   ============================================ */
+.bv-arrangement-archive {
+    padding: 40px 0;
+}
+
+.bv-arrangement-archive .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.archive-description {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Arrangement Grid */
+.arrangement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .arrangement-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Arrangement Card
+   ============================================ */
+.arrangement-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.arrangement-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.arrangement-thumbnail {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.arrangement-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.arrangement-card:hover .arrangement-thumbnail img {
+    transform: scale(1.05);
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.status-badge.status-paamelding_aapen {
+    background: #4CAF50;
+}
+
+.status-badge.status-fullbooket {
+    background: #FF9800;
+}
+
+.status-badge.status-avlyst {
+    background: #F44336;
+}
+
+.status-badge.status-kommende {
+    background: #2196F3;
+}
+
+.arrangement-content {
+    padding: 20px;
+}
+
+.arrangement-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+}
+
+.arrangement-type {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+.arrangement-format {
+    color: #666;
+}
+
+.arrangement-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.arrangement-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.arrangement-title a:hover {
+    color: #0066cc;
+}
+
+.arrangement-date-time {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.arrangement-location {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.arrangement-excerpt {
+    margin: 15px 0;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.arrangement-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 15px;
+}
+
+.arrangement-capacity {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.btn-more {
+    color: #0066cc;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.btn-more:hover {
+    color: #004999;
+}
+
+/* ============================================
+   Single Arrangement Page
+   ============================================ */
+.single-arrangement .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.arrangement-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 1024px) {
+    .arrangement-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Main Content */
+.arrangement-main {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.arrangement-featured-image {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.arrangement-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.arrangement-header {
+    margin-bottom: 30px;
+}
+
+.arrangement-type-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #e3f2fd;
+    color: #0066cc;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.arrangement-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 15px 0;
+}
+
+.arrangement-status-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.format-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #f5f5f5;
+    color: #555;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.arrangement-content-area {
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.05rem;
+}
+
+.arrangement-content-area p {
+    margin-bottom: 1em;
+}
+
+/* Sidebar */
+.arrangement-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebar-widget {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.sidebar-widget h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.praktisk-info .info-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.praktisk-info .info-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.praktisk-info .info-item strong {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.praktisk-info .info-item span,
+.praktisk-info .info-item a {
+    font-size: 1rem;
+    color: #333;
+}
+
+.praktisk-info .info-item a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.praktisk-info .info-item a:hover {
+    text-decoration: underline;
+}
+
+.capacity-info {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Registration Widget */
+.pamelding-widget {
+    background: #f8f9fa;
+    border: 2px solid #0066cc;
+}
+
+.register-message {
+    padding: 15px;
+    background: #fff;
+    border-left: 4px solid #0066cc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.register-message a {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+.gravity-form-wrapper .gform_wrapper {
+    margin: 0;
+}
+
+.gravity-form-wrapper .gform_wrapper input[type="text"],
+.gravity-form-wrapper .gform_wrapper input[type="email"],
+.gravity-form-wrapper .gform_wrapper input[type="tel"],
+.gravity-form-wrapper .gform_wrapper textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.gravity-form-wrapper .gform_wrapper .gform_button {
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.gravity-form-wrapper .gform_wrapper .gform_button:hover {
+    background: #004999;
+}
+
+.no-form-message {
+    padding: 15px;
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    border-radius: 4px;
+    color: #856404;
+}
+
+/* ============================================
+   No Arrangements Message
+   ============================================ */
+.no-arrangements {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.no-arrangements p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.no-arrangements a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.no-arrangements a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   Pagination
+   ============================================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px 0;
+}
+
+.pagination a,
+.pagination span {
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.pagination a:hover {
+    background: #f5f5f5;
+}
+
+.pagination .current {
+    background: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .arrangement-title {
+        font-size: 2rem;
+    }
+
+    .arrangement-main {
+        padding: 20px;
+    }
+
+    .sidebar-widget {
+        padding: 20px;
+    }
+}

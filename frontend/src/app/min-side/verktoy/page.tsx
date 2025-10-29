@@ -67,8 +67,9 @@ export default function MineSideVerktoyPage() {
       // Reload tools
       const memberTools = await getMyTools(userId);
       setTools(memberTools);
-    } catch (error: any) {
-      setMessage({ type: 'error', text: error.message || 'Feil ved sletting' });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Feil ved sletting';
+      setMessage({ type: 'error', text: errorMessage });
     }
   };
 

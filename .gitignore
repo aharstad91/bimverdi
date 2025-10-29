@@ -1,4 +1,6 @@
 # WordPress
+wordpress/wp-admin/
+wordpress/wp-includes/
 wordpress/wp-content/uploads/
 wordpress/wp-content/cache/
 wordpress/wp-content/backups/
@@ -44,3 +46,12 @@ Thumbs.db
 .env
 .env.local
 .env.production.local
+
+# Database backups
+database/backups/*.sql
+
+# PID files
+*.pid
+
+# Archive (temporary, can be deleted after review)
+archive_delete_later/

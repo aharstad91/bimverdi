@@ -9,10 +9,26 @@
 add_action('rest_api_init', function() {
     remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
     add_filter('rest_pre_serve_request', function($value) {
-        header('Access-Control-Allow-Origin: *');
+        // Get the origin from the request
+        $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+        // Allowed origins (development and production)
+        $allowed_origins = [
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'https://bimverdi.no',
+            'https://www.bimverdi.no',
+        ];
+
+        // Check if origin is allowed
+        if (in_array($origin, $allowed_origins)) {
+            header('Access-Control-Allow-Origin: ' . $origin);
+            header('Access-Control-Allow-Credentials: true');
+        }
+
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Credentials: true');
         header('Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce');
+
         return $value;
     });
 }, 15);
@@ -114,8 +130,27 @@ function bimverdi_theme_support() {
 }
 add_action('after_setup_theme', 'bimverdi_theme_support');
 
+// Enqueue styles
+function bimverdi_enqueue_styles() {
+    // Arrangement CSS
+    if (is_post_type_archive('bv_arrangement') || is_singular('bv_arrangement')) {
+        wp_enqueue_style(
+            'bimverdi-arrangement',
+            get_template_directory_uri() . '/assets/css/arrangement.css',
+            array(),
+            '1.0.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'bimverdi_enqueue_styles');
+
 // Include ACF Field Groups
 require_once get_template_directory() . '/acf-fields.php';
+
+// Include Arrangement CPT and Functions
+require_once get_template_directory() . '/inc/arrangement-cpt.php';
+require_once get_template_directory() . '/inc/arrangement-functions.php';
+require_once get_template_directory() . '/inc/arrangement-api.php';
 
 // Enable ACF REST API support
 add_filter('acf/settings/rest_api_enabled', '__return_true');

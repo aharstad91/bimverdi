@@ -17,7 +17,7 @@ export default function Footer() {
               <li><Link href="/medlemsbedrifter" className="hover:text-white">Medlemsbedrifter</Link></li>
               <li><Link href="/verktoy" className="hover:text-white">Verktøy</Link></li>
               <li><Link href="/caser" className="hover:text-white">Caser</Link></li>
-              <li><Link href="/arrangementer" className="hover:text-white">Arrangementer</Link></li>
+              <li><Link href="/arrangement" className="hover:text-white">Arrangementer</Link></li>
             </ul>
           </div>
           <div>
