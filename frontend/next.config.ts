@@ -3,10 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  
+
   // Bedre error handling og stabilitet
   reactStrictMode: true,
-  
+
   // TypeScript - fortsett å kjøre selv ved feil i development
   typescript: {
     // ⚠️ ADVARSEL: Lar Next.js kjøre selv med TypeScript-feil

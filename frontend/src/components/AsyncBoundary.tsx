@@ -5,8 +5,8 @@ interface AsyncBoundaryProps {
   fallback?: React.ReactNode;
 }
 
-export function AsyncBoundary({ 
-  children, 
+export function AsyncBoundary({
+  children,
   fallback = <LoadingSpinner />
 }: AsyncBoundaryProps) {
   return (

@@ -25,7 +25,7 @@ function log(message, color = 'reset') {
 
 function startServer() {
   log('🚀 Starting Next.js development server...', 'blue');
-  
+
   serverProcess = spawn('npm', ['run', 'dev:next'], {
     stdio: 'inherit',
     shell: true,
@@ -39,7 +39,7 @@ function startServer() {
 
   serverProcess.on('exit', (code, signal) => {
     log(`\n⚠️  Server exited with code ${code} and signal ${signal}`, 'yellow');
-    
+
     // Check if we're restarting too frequently
     const timeSinceLastRestart = Date.now() - lastRestartTime;
     if (timeSinceLastRestart < 5000) {
@@ -55,9 +55,9 @@ function startServer() {
     } else {
       restartCount = 0;
     }
-    
+
     lastRestartTime = Date.now();
-    
+
     log('♻️  Restarting server in 2 seconds...', 'green');
     setTimeout(startServer, 2000);
   });

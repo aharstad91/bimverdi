@@ -36,14 +36,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Utforsk BIMVerdi</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Link href="/medlemsbedrifter" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <Link href="/deltakere" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
               <div className="text-blue-600 text-4xl mb-4">🏢</div>
-              <h3 className="text-xl font-semibold mb-2">Medlemsbedrifter</h3>
+              <h3 className="text-xl font-semibold mb-2">Deltakere</h3>
               <p className="text-gray-600">
                 Finn BIM-eksperter og samarbeidspartnere
               </p>
             </Link>
-            
+
             <Link href="/verktoy" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
               <div className="text-blue-600 text-4xl mb-4">🛠️</div>
               <h3 className="text-xl font-semibold mb-2">Verktøy</h3>
@@ -51,7 +51,7 @@ export default function Home() {
                 Oversikt over BIM-verktøy og ressurser
               </p>
             </Link>
-            
+
             <Link href="/caser" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
               <div className="text-blue-600 text-4xl mb-4">📊</div>
               <h3 className="text-xl font-semibold mb-2">Caser</h3>
@@ -59,7 +59,7 @@ export default function Home() {
                 Lær av vellykkede BIM-prosjekter
               </p>
             </Link>
-            
+
             <Link href="/arrangementer" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
               <div className="text-blue-600 text-4xl mb-4">📅</div>
               <h3 className="text-xl font-semibold mb-2">Arrangementer</h3>

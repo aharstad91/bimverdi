@@ -13,8 +13,8 @@ export default function Header() {
               <Link href="/artikler" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
                 Artikler
               </Link>
-              <Link href="/medlemsbedrifter" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
-                Medlemsbedrifter
+              <Link href="/deltakere" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
+                Deltakere
               </Link>
               <Link href="/verktoy" className="inline-flex items-center px-1 pt-1 text-gray-900 hover:text-blue-600">
                 Verktøy

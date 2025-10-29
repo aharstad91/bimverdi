@@ -8,9 +8,9 @@ interface ErrorBoundaryProps {
   fallback?: React.ComponentType<{ error: Error; reset: () => void }>;
 }
 
-export default function ErrorBoundary({ 
-  children, 
-  fallback: Fallback 
+export default function ErrorBoundary({
+  children,
+  fallback: Fallback
 }: ErrorBoundaryProps) {
   return (
     <>
@@ -19,11 +19,11 @@ export default function ErrorBoundary({
   );
 }
 
-export function GlobalErrorFallback({ 
-  error, 
-  reset 
-}: { 
-  error: Error & { digest?: string }; 
+export function GlobalErrorFallback({
+  error,
+  reset
+}: {
+  error: Error & { digest?: string };
   reset: () => void;
 }) {
   const router = useRouter();
@@ -44,8 +44,8 @@ export function GlobalErrorFallback({
             Noe gikk galt
           </h2>
           <p className="text-gray-600 mb-6">
-            {process.env.NODE_ENV === 'development' 
-              ? error.message 
+            {process.env.NODE_ENV === 'development'
+              ? error.message
               : 'En uventet feil oppstod. Vennligst prøv igjen.'}
           </p>
           <div className="space-y-3">
