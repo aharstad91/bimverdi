@@ -5,7 +5,7 @@
  */
 
 // Load WordPress
-require_once(__DIR__ . '/wordpress/wp-load.php');
+require_once(__DIR__ . '/wp-load.php');
 
 // Flush rewrite rules
 flush_rewrite_rules();

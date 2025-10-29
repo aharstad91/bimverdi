@@ -5,10 +5,10 @@ const WP_API_BASE = process.env.NEXT_PUBLIC_WORDPRESS_API_URL?.replace('/index.p
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const arrangementId = params.id;
+    const { id: arrangementId } = await params;
     const body = await request.json();
 
     // Get session to see if user is logged in

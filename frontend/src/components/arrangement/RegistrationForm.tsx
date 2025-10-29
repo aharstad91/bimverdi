@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 interface RegistrationFormProps {
@@ -58,6 +58,42 @@ export function RegistrationForm({
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [serverError, setServerError] = useState<string | null>(null);
+  const [actuallyRegistered, setActuallyRegistered] = useState(isRegistered);
+  const [checkingRegistration, setCheckingRegistration] = useState(false);
+
+  // Function to check registration status
+  const checkRegistration = async () => {
+    if (!isLoggedIn || !userEmail) {
+      setActuallyRegistered(false);
+      return;
+    }
+
+    setCheckingRegistration(true);
+    try {
+      const response = await fetch(
+        `/api/arrangements/${arrangementId}/check-registration?email=${encodeURIComponent(userEmail)}`,
+        {
+          cache: 'no-store'
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setActuallyRegistered(data.registered || false);
+      }
+    } catch (error) {
+      console.error('Error checking registration:', error);
+      // Fall back to server-provided value
+      setActuallyRegistered(isRegistered);
+    } finally {
+      setCheckingRegistration(false);
+    }
+  };
+
+  // Check registration status on mount (client-side)
+  useEffect(() => {
+    checkRegistration();
+  }, [arrangementId, isLoggedIn, userEmail, isRegistered]);
 
   // Handle unregister
   const handleUnregister = async () => {
@@ -77,14 +113,17 @@ export function RegistrationForm({
       );
 
       if (!response.ok) {
-        throw new Error('Kunne ikke avmelde fra arrangement');
+        const data = await response.json();
+        throw new Error(data.error || 'Kunne ikke avmelde fra arrangement');
       }
 
-      // Success - reload page to show registration form again
-      window.location.reload();
+      // Success - check registration status again (should show form)
+      await checkRegistration();
     } catch (error) {
       console.error('Unregister error:', error);
-      setServerError('Kunne ikke avmelde fra arrangementet. Vennligst prøv igjen.');
+      setServerError(
+        error instanceof Error ? error.message : 'Kunne ikke avmelde fra arrangementet. Vennligst prøv igjen.'
+      );
       setIsSubmitting(false);
     }
   };
@@ -160,7 +199,19 @@ export function RegistrationForm({
     );
   }
 
-  if (isRegistered) {
+  // Show loading while checking registration
+  if (checkingRegistration) {
+    return (
+      <div className="rounded-lg border bg-white p-6 shadow-sm">
+        <div className="flex items-center justify-center gap-3">
+          <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
+          <p className="text-sm text-gray-600">Sjekker påmeldingsstatus...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (actuallyRegistered) {
     return (
       <div className="space-y-4">
         {serverError && (
