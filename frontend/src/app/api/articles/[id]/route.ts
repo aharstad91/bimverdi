@@ -4,31 +4,42 @@
  * DELETE /api/articles/[id] - Delete article
  */
 
+'use server';
+
 import { NextRequest, NextResponse } from 'next/server';
+import { getSessionServer } from '@/app/actions/auth';
 
 const WP_API_BASE =
-  process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
-  'http://localhost:8888/bimverdi/wordpress/index.php?rest_route=';
+  process.env.WORDPRESS_API_URL ||
+  'http://localhost:8888/bimverdi/wordpress/wp-json';
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const cookies = request.headers.get('cookie') || '';
+    // Get authenticated session
+    const session = await getSessionServer();
 
-    const response = await fetch(
-      `${WP_API_BASE}/bimverdi/v1/member-articles/${params.id}`,
-      {
-        method: 'GET',
-        headers: {
-          Cookie: cookies,
-        },
-      }
-    );
+    if (!session || !session.isLoggedIn || !session.userId) {
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { id } = await params;
+    const url = new URL(`${WP_API_BASE}/bimverdi/v1/member-articles/${id}`);
+    url.searchParams.set('user_id', String(session.userId));
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     const data = await response.json();
-
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
     console.error('Error fetching article:', error);
@@ -44,23 +55,31 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const body = await request.json();
-    const cookies = request.headers.get('cookie') || '';
+    // Get authenticated session
+    const session = await getSessionServer();
 
-    const response = await fetch(
-      `${WP_API_BASE}/bimverdi/v1/member-articles/${params.id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Cookie: cookies,
-        },
-        body: JSON.stringify(body),
-      }
-    );
+    if (!session || !session.isLoggedIn || !session.userId) {
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { id } = await params;
+    const body = await request.json();
+
+    const url = new URL(`${WP_API_BASE}/bimverdi/v1/member-articles/${id}`);
+    url.searchParams.set('user_id', String(session.userId));
+
+    const response = await fetch(url.toString(), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
 
     const data = await response.json();
-
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
     console.error('Error updating article:', error);
@@ -72,24 +91,32 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const cookies = request.headers.get('cookie') || '';
+    // Get authenticated session
+    const session = await getSessionServer();
 
-    const response = await fetch(
-      `${WP_API_BASE}/bimverdi/v1/member-articles/${params.id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Cookie: cookies,
-        },
-      }
-    );
+    if (!session || !session.isLoggedIn || !session.userId) {
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { id } = await params;
+    const url = new URL(`${WP_API_BASE}/bimverdi/v1/member-articles/${id}`);
+    url.searchParams.set('user_id', String(session.userId));
+
+    const response = await fetch(url.toString(), {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     const data = await response.json();
-
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
     console.error('Error deleting article:', error);
