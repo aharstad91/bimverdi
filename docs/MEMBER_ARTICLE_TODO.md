@@ -38,7 +38,7 @@
 
 ---
 
-## FASE 0: Prerequisites & Verification (2-3 hours) ⭐ STARTER HER
+## FASE 0: Prerequisites & Verification (2-3 hours) ✅ COMPLETED
 
 ### 0.1 React-Quill Setup Test
 - [ ] `cd frontend && npm install react-quill quill-image-uploader`
@@ -58,21 +58,27 @@
 - [ ] **If FAIL:** Implementer JWT token fallback via cookie
 - [ ] Dokumenter løsning i `docs/AUTH_STRATEGY.md`
 
-### 0.3 User Meta & Company Linking Check
-- [ ] Query database: `SELECT user_id, meta_key, meta_value FROM wp_usermeta WHERE meta_key LIKE '%company%'`
-- [ ] Verifiser: Finnes `_bimverdi_company` eller lignende?
-- [ ] Test query: Hent bedrift for test-bruker `andreas@aharstad.no`
-- [ ] **If MISSING:**
-  - [ ] Opprett ACF user field: `company_id` (relationship til `deltaker` CPT)
-  - [ ] Oppdater registrerings-flow for å sette company
-  - [ ] Backfill existing users (hvis nødvendig)
-- [ ] Dokumenter user meta structure i `docs/USER_META_SCHEMA.md`
+### 0.3 User Meta & Company Linking Check ✅ COMPLETED
+- [x] Query database: `SELECT user_id, meta_key, meta_value FROM wp_usermeta WHERE meta_key LIKE '%company%'`
+- [x] Verifiser: Finnes `_bimverdi_company` eller lignende?
+- [x] Test query: Hent bedrift for test-bruker `andreas@aharstad.no`
+- [x] **FINDINGS:**
+  - ✅ `company` user meta exists (text field with company name)
+  - ✅ `associated_member` user meta exists (relationship to deltaker CPT)
+  - ✅ `/min-side/mitt-medlem` already implements member association
+  - ✅ API endpoints exist: `GET/POST /bimverdi/v1/profile/{userId}/member`
+  - ✅ UserACF type includes `associated_member?: number`
+  - 🎯 **DECISION:** Use existing `associated_member` for article-to-company linking
+- [x] Dokumenter user meta structure i `docs/MEMBER_ARTICLE_SCHEMA.md`
 
-### 0.4 Database Schema Planning
-- [ ] Design `bv_member_article` post type schema
-- [ ] Plan ACF field groups (se FASE 1.2)
-- [ ] Plan taxonomy structure
-- [ ] **Decision:** Trenger vi egen tabell for article metadata? (Sannsynligvis NEI - ACF holder)
+### 0.4 Database Schema Planning ✅ COMPLETED
+- [x] Design `bv_member_article` post type schema
+- [x] Plan ACF field groups (3 groups: Content, Author, Review)
+- [x] Plan data relationships (User → Article → Company)
+- [x] **Decision:** Use ACF (no custom tables needed)
+- [x] Document schema in `docs/MEMBER_ARTICLE_SCHEMA.md`
+- [x] Plan REST API endpoints (6 endpoints total)
+- [x] Plan custom post statuses: `admin_review`, `rejected`
 
 ---
 
