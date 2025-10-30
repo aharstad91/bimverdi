@@ -26,8 +26,8 @@ const tabs: Tab[] = [
     icon: '🔐',
   },
   {
-    name: 'Mitt innhold',
-    href: '/min-side/innhold',
+    name: 'Mine artikler',
+    href: '/min-side/mine-artikler',
     icon: '📄',
   },
   {

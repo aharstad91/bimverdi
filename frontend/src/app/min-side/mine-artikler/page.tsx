@@ -9,7 +9,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { getSessionServer } from '@/app/actions/auth';
+import { getSession } from '@/lib/session';
 import { getUserArticles, deleteArticle } from '@/lib/article-api';
 import { Article } from '@/types/article';
 import { ArticleCard } from '@/components/articles/ArticleCard';
@@ -45,7 +45,7 @@ export default function MineArtiklerPage() {
 
   const checkAuthAndLoadArticles = async () => {
     try {
-      const session = await getSessionServer();
+      const session = await getSession();
 
       if (!session || !session.isLoggedIn) {
         router.push('/logg-inn?returnUrl=/min-side/mine-artikler');

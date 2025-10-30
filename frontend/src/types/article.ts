@@ -218,8 +218,8 @@ export function formatArticleDate(dateString: string | null): string {
 /**
  * Get readable word count
  */
-export function formatWordCount(count: number): string {
-  if (count === 0) return 'Ingen ord';
+export function formatWordCount(count: number | null | undefined): string {
+  if (!count) return 'Ingen ord';
   if (count === 1) return '1 ord';
   return `${count.toLocaleString('nb-NO')} ord`;
 }
